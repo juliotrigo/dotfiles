@@ -1,0 +1,28 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor backup/temp files
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+
+# Logs
+*.log
+
+# Sensitive files
+*.pem
+*.key
+*.p12
+.env
+.env.local
+*.secret
