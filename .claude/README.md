@@ -1,5 +1,9 @@
 # Claude Code
 
+## Customization
+
+In [`CLAUDE.md`](CLAUDE.md), replace my name with the name you want to use.
+
 ## Attribution
 
 Inspiration has been taken from the following places:
