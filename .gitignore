@@ -26,3 +26,6 @@ Desktop.ini
 .env
 .env.local
 *.secret
+
+# Local temporary files
+tmp/
