@@ -29,7 +29,7 @@ creating the symbolic links.
 
 ### Homebrew
 
-Get a list of all the formulae and other types in the Brewfile:
+Get a list of all the formulae and casks in the Brewfile:
 
 ```shell
 brew bundle list
