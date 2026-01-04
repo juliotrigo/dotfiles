@@ -27,6 +27,27 @@ ln -s $DOTFILES_DIR/.claude/docs ~/.claude/docs
 **Note**: ensure that the `~/.claude` folder does not contain any of the listed files before
 creating the symbolic links.
 
+### Homebrew
+
+Get a list of all the formulae and other types in the Brewfile:
+
+```shell
+brew bundle list
+brew bundle list --cask
+```
+
+Check whether the Brewfile's dependencies are satisfied:
+
+```shell
+brew bundle check --verbose
+```
+
+Satisfy missing dependencies:
+
+```shell
+brew bundle install
+```
+
 ## Resources
 
 * Unofficial [guide](https://dotfiles.github.io/) to dotfiles on GitHub.
