@@ -2,6 +2,41 @@
 
 My dotfiles.
 
+## Structure
+
+**Dotfiles repo:**
+```
+dotfiles/
+├── .claude/
+│   ├── CLAUDE.md
+│   ├── commands/
+│   └── docs/
+├── .git-hooks/
+│   ├── README.md
+│   ├── hook-wrapper
+│   └── ... (symlinks)
+├── .gitattributes
+├── .gitconfig.template
+├── .gitignore_global
+├── .stCommitMsg
+└── scripts/
+    └── setup-gitconfig.sh
+```
+
+**Home directory:**
+```
+~/
+├── .claude/
+│   ├── CLAUDE.md            -> dotfiles/.claude/CLAUDE.md
+│   ├── commands/            -> dotfiles/.claude/commands/
+│   └── docs/                -> dotfiles/.claude/docs/
+├── .git-hooks/              -> dotfiles/.git-hooks/
+├── .gitattributes           -> dotfiles/.gitattributes
+├── .gitconfig               # Generated from template
+├── .gitignore_global        -> dotfiles/.gitignore_global
+└── .stCommitMsg             -> dotfiles/.stCommitMsg
+```
+
 ## Installation
 
 ### Setup
