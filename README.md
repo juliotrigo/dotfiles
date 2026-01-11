@@ -75,6 +75,8 @@ GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" $DOTFILES_DIR/
 
 **Note**: Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
 
+For more information about git hooks configuration, see [.git-hooks/README.md](.git-hooks/README.md).
+
 ### Homebrew
 
 Get a list of all the formulae and casks in the Brewfile:
