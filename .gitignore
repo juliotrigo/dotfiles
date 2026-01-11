@@ -29,3 +29,7 @@ Desktop.ini
 
 # Local temporary files
 tmp/
+
+# Claude Code local memory
+CLAUDE.local.md
+.claude/*.local.md
