@@ -33,7 +33,7 @@ Rule #2: NEVER mention Claude or Antropic in public posts like git commits, PRs,
 - You MUST MATCH the style and formatting of surrounding code, even if it differs from standard style guides. Consistency within a file trumps external standards. If you feel strongly about refactoring a file, because of how bad the original implementation is, double-check with me first.
 - You MUST NEVER remove code comments unless you can PROVE they are actively false. Comments are important documentation and must be preserved.
 - You MUST NEVER refer to temporal context in comments (like "recently refactored" "moved") or code. Comments should be evergreen and describe the code as it is. If you name something "new" or "enhanced" or "improved", you've probably made a mistake and MUST STOP and ask me what to do.
-- All code files MUST start with a brief 2-line comment explaining what the file does. Each line MUST start with "ABOUTME: " to make them easily greppable.
+- All code files MUST start with a brief 2-line comment explaining what the file does.
 - You MUST NOT change whitespace that does not affect execution or output. Otherwise, use a formatting tool.
 - If possible, implement sound principles like SOLID, DRY, KISS, YAGNI, etc.
 - ALWAYS try to use the latest version of languages, third-party and local libraries, frameworks, and paradigms. If this means updating the requirements for a project, you MUST ask for permission first.
