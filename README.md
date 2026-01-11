@@ -27,6 +27,19 @@ ln -s $DOTFILES_DIR/.claude/docs ~/.claude/docs
 **Note**: ensure that the `~/.claude` folder does not contain any of the listed files before
 creating the symbolic links.
 
+### Git Config
+
+```shell
+ln -s $DOTFILES_DIR/.git-hooks ~/.git-hooks
+ln -s $DOTFILES_DIR/.gitattributes ~/.gitattributes
+ln -s $DOTFILES_DIR/.gitignore_global ~/.gitignore_global
+ln -s $DOTFILES_DIR/.stCommitMsg ~/.stCommitMsg
+
+GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" $DOTFILES_DIR/scripts/setup-gitconfig.sh
+```
+
+**Note**: Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
+
 ### Homebrew
 
 Get a list of all the formulae and casks in the Brewfile:
