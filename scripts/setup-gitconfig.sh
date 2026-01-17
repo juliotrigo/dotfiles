@@ -2,18 +2,19 @@
 # Generates ~/.gitconfig from template with user-specific values.
 # Prompts for confirmation if existing config differs from generated one.
 # Requires bash (not POSIX sh) due to use of [[ ]], read -n, and process substitution.
+#
+# Usage: bash setup-gitconfig.sh [--dry-run]
 
 set -e
 
-# Ensure script is running under bash (not POSIX mode)
-if [ -z "$BASH_VERSION" ]; then
-    echo "Error: This script requires bash. Please run with: bash $0"
-    exit 1
-fi
-if [[ "$SHELLOPTS" == *"posix"* ]]; then
-    echo "Error: This script cannot run in POSIX mode. Please run with: bash $0"
-    exit 1
-fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
+# Source shared library
+source "$SCRIPT_DIR/lib/common.sh"
+
+check_bash
+parse_dry_run "$1"
 
 # Check for required dependency
 if ! command -v envsubst &> /dev/null; then
@@ -22,8 +23,6 @@ if ! command -v envsubst &> /dev/null; then
     exit 1
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
 TEMPLATE_FILE="$DOTFILES_DIR/.gitconfig.template"
 TARGET_FILE="$HOME/.gitconfig"
 
@@ -61,24 +60,34 @@ NEW_CONFIG=$(envsubst '${GIT_USER_NAME} ${GIT_USER_EMAIL}' < "$TEMPLATE_FILE")
 # Check if target file exists
 if [ -f "$TARGET_FILE" ]; then
     CURRENT_CONFIG=$(cat "$TARGET_FILE")
-    
+
     # Compare configs
     if [ "$NEW_CONFIG" = "$CURRENT_CONFIG" ]; then
         echo "No changes needed. $TARGET_FILE is up to date."
         exit 0
     fi
-    
+
     # Show diff
     echo "Differences found between generated config and existing $TARGET_FILE:"
     echo ""
     diff --color=auto <(echo "$CURRENT_CONFIG") <(echo "$NEW_CONFIG") || true
     echo ""
-    
+
+    if [ "$DRY_RUN" = true ]; then
+        echo "Would overwrite $TARGET_FILE"
+        exit 0
+    fi
+
     # Ask for confirmation
     read -p "Do you want to override $TARGET_FILE? [y/N] " -n 1 -r
     echo ""
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         echo "Aborted. No changes made."
+        exit 0
+    fi
+else
+    if [ "$DRY_RUN" = true ]; then
+        echo "Would create $TARGET_FILE"
         exit 0
     fi
 fi

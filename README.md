@@ -20,6 +20,11 @@ dotfiles/
 ├── .gitignore_global
 ├── .stCommitMsg
 └── scripts/
+    ├── lib/
+    │   ├── common.sh          # Shared: bash checks, dry-run parsing
+    │   └── symlinks.sh        # Shared: symlink creation function
+    ├── setup-claude.sh
+    ├── setup-git-symlinks.sh
     └── setup-gitconfig.sh
 ```
 
@@ -54,26 +59,23 @@ git clone https://github.com/juliotrigo/dotfiles.git $DOTFILES_DIR
 ### Claude Code
 
 ```shell
-ln -s $DOTFILES_DIR/.claude/CLAUDE.md ~/.claude/CLAUDE.md
-ln -s $DOTFILES_DIR/.claude/commands ~/.claude/commands
-ln -s $DOTFILES_DIR/.claude/docs ~/.claude/docs
+bash $DOTFILES_DIR/scripts/setup-claude.sh
 ```
 
-**Note**: ensure that the `~/.claude` folder does not contain any of the listed files before
-creating the symbolic links.
+Use `--dry-run` to preview changes without making them.
 
 ### Git Config
 
 ```shell
-ln -s $DOTFILES_DIR/.git-hooks ~/.git-hooks
-ln -s $DOTFILES_DIR/.gitattributes ~/.gitattributes
-ln -s $DOTFILES_DIR/.gitignore_global ~/.gitignore_global
-ln -s $DOTFILES_DIR/.stCommitMsg ~/.stCommitMsg
+bash $DOTFILES_DIR/scripts/setup-git-symlinks.sh
 
-GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" $DOTFILES_DIR/scripts/setup-gitconfig.sh
+GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" \
+    bash $DOTFILES_DIR/scripts/setup-gitconfig.sh
 ```
 
-**Note**: Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
+Both scripts support `--dry-run` to preview changes without making them.
+
+Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
 
 For more information about git hooks configuration, see [.git-hooks/README.md](.git-hooks/README.md).
 
