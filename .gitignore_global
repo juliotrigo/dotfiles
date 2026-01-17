@@ -1,0 +1,17 @@
+# Global gitignore - patterns to ignore across all git repositories
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# Editors and IDEs
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-workspace
