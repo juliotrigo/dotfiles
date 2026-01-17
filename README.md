@@ -62,6 +62,7 @@ git clone https://github.com/juliotrigo/dotfiles.git $DOTFILES_DIR
 bash $DOTFILES_DIR/scripts/setup-claude.sh
 ```
 
+The script is idempotent and skips existing files/symlinks with warnings.
 Use `--dry-run` to preview changes without making them.
 
 ### Git Config
@@ -73,6 +74,7 @@ GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" \
     bash $DOTFILES_DIR/scripts/setup-gitconfig.sh
 ```
 
+The symlink script is idempotent and skips existing files/symlinks with warnings.
 Both scripts support `--dry-run` to preview changes without making them.
 
 Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
