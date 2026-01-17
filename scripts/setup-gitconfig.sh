@@ -1,6 +1,7 @@
 #!/bin/bash
 # Generates ~/.gitconfig from template with user-specific values.
 # Prompts for confirmation if existing config differs from generated one.
+# Creates a backup (~/.gitconfig.backup.<epoch>) before overwriting.
 # Requires bash (not POSIX sh) due to use of [[ ]], read -n, and process substitution.
 #
 # Usage: bash setup-gitconfig.sh [--dry-run]
@@ -73,7 +74,10 @@ if [ -f "$TARGET_FILE" ]; then
     diff --color=auto <(echo "$CURRENT_CONFIG") <(echo "$NEW_CONFIG") || true
     echo ""
 
+    BACKUP_FILE="$TARGET_FILE.backup.$(date +%s)"
+
     if [ "$DRY_RUN" = true ]; then
+        echo "Would back up $TARGET_FILE to $BACKUP_FILE"
         echo "Would overwrite $TARGET_FILE"
         exit 0
     fi
@@ -85,6 +89,10 @@ if [ -f "$TARGET_FILE" ]; then
         echo "Aborted. No changes made."
         exit 0
     fi
+
+    # Create backup before overwriting
+    cp "$TARGET_FILE" "$BACKUP_FILE"
+    echo "Backed up existing config to $BACKUP_FILE"
 else
     if [ "$DRY_RUN" = true ]; then
         echo "Would create $TARGET_FILE"

@@ -75,6 +75,7 @@ GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" \
 ```
 
 The symlink script is idempotent and skips existing files/symlinks with warnings.
+The gitconfig script creates a backup before overwriting an existing config.
 Both scripts support `--dry-run` to preview changes without making them.
 
 Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
