@@ -1,0 +1,40 @@
+[user]
+	name = ${GIT_USER_NAME}
+	email = ${GIT_USER_EMAIL}
+
+[core]
+	excludesfile = ~/.gitignore_global
+	attributesfile = ~/.gitattributes
+	hooksPath = ~/.git-hooks
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[commit]
+	template = ~/.stCommitMsg
+
+[push]
+	default = upstream
+
+[merge]
+	conflictstyle = diff3
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[init]
+	defaultBranch = master
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[github]
+	protocol = ssh
