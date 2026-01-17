@@ -18,7 +18,7 @@ dotfiles/
 ├── .gitattributes
 ├── .gitconfig.template
 ├── .gitignore_global
-├── .stCommitMsg
+├── .gitmessage
 └── scripts/
     ├── lib/
     │   ├── common.sh          # Shared: bash checks, dry-run parsing
@@ -39,7 +39,7 @@ dotfiles/
 ├── .gitattributes           -> dotfiles/.gitattributes
 ├── .gitconfig               # Generated from template
 ├── .gitignore_global        -> dotfiles/.gitignore_global
-└── .stCommitMsg             -> dotfiles/.stCommitMsg
+└── .gitmessage              -> dotfiles/.gitmessage
 ```
 
 ## Installation

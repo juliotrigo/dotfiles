@@ -7,6 +7,7 @@
 	attributesfile = ~/.gitattributes
 	hooksPath = ~/.git-hooks
 
+# macOS-only: Sourcetree diff/merge tools (uses opendiff and Sourcetree.app)
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -16,7 +17,7 @@
 	trustExitCode = true
 
 [commit]
-	template = ~/.stCommitMsg
+	template = ~/.gitmessage
 
 [push]
 	default = upstream

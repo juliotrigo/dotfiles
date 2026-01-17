@@ -23,7 +23,7 @@ echo ""
 create_symlink "$DOTFILES_DIR/.git-hooks" "$HOME/.git-hooks"
 create_symlink "$DOTFILES_DIR/.gitattributes" "$HOME/.gitattributes"
 create_symlink "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
-create_symlink "$DOTFILES_DIR/.stCommitMsg" "$HOME/.stCommitMsg"
+create_symlink "$DOTFILES_DIR/.gitmessage" "$HOME/.gitmessage"
 
 echo ""
 echo "Done."
