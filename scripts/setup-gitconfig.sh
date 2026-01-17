@@ -1,8 +1,26 @@
 #!/bin/bash
 # Generates ~/.gitconfig from template with user-specific values.
 # Prompts for confirmation if existing config differs from generated one.
+# Requires bash (not POSIX sh) due to use of [[ ]], read -n, and process substitution.
 
 set -e
+
+# Ensure script is running under bash (not POSIX mode)
+if [ -z "$BASH_VERSION" ]; then
+    echo "Error: This script requires bash. Please run with: bash $0"
+    exit 1
+fi
+if [[ "$SHELLOPTS" == *"posix"* ]]; then
+    echo "Error: This script cannot run in POSIX mode. Please run with: bash $0"
+    exit 1
+fi
+
+# Check for required dependency
+if ! command -v envsubst &> /dev/null; then
+    echo "Error: envsubst is required but not installed."
+    echo "Install it with: brew install gettext"
+    exit 1
+fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"

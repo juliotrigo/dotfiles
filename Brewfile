@@ -4,6 +4,7 @@ brew "aws-vault"
 # Git
 brew "gh"
 brew "pre-commit"
+brew "gettext"  # Provides envsubst, used by setup-gitconfig.sh
 
 # FZF
 brew "fzf"
