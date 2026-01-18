@@ -10,6 +10,7 @@ dotfiles/
 ├── .claude/
 │   ├── CLAUDE.md
 │   ├── commands/
+│   │   └── release.md
 │   └── docs/
 ├── .git-hooks/
 │   ├── README.md
