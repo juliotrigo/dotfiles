@@ -68,7 +68,7 @@ Use `--dry-run` to preview changes without making them.
 
 ### Homebrew
 
-Install dependencies from the Brewfile:
+Satisfy missing dependencies:
 
 ```shell
 brew bundle install
