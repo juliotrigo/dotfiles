@@ -8,11 +8,12 @@ HOOK_NAME=$(basename "$0")
 
 # Prepends ticket IDs to commit messages based on branch name.
 #
-# Supported prefixes: FR-, CVP-, CVF-, CVR-
+# Configure prefixes via: git config --global hooks.ticketPrefixes "ABC|DEF|GHI"
+# If not configured, this hook does nothing (opt-in behavior).
 #
 # Examples:
-#   Branch: CVF-1234-fix-bug         Message: "Fix login"   -> "CVF-1234 Fix login"
-#   Branch: CVF-1234-CVF-5678-feat   Message: "Add button"  -> "CVF-1234-CVF-5678 Add button"
+#   Branch: ABC-1234-fix-bug         Message: "Fix login"   -> "ABC-1234 Fix login"
+#   Branch: ABC-1234-DEF-5678-feat   Message: "Add button"  -> "ABC-1234-DEF-5678 Add button"
 #   Branch: main                     Message: "Fix login"   -> "Fix login" (unchanged)
 #   Branch: feature/something        Message: "Add feature" -> "Add feature" (unchanged)
 #
@@ -38,9 +39,17 @@ prepend_ticket_id() {
         return
     fi
 
+    # Get ticket prefixes from git config (opt-in, does nothing if not configured)
+    local prefixes=$(git config --get hooks.ticketPrefixes)
+
+    # Exit if no prefixes configured
+    if [ -z "$prefixes" ]; then
+        return
+    fi
+
     # Extract consecutive ticket IDs from the start of the branch name
-    # Matches patterns like: CVF-1234, CVF-1234-CVF-3829, FR-123-CVP-456-CVF-789
-    local ticket_prefix=$(echo "$branch_name" | grep -oE '^((FR|CVP|CVF|CVR)-[0-9]+)(-((FR|CVP|CVF|CVR)-[0-9]+))*' | head -1)
+    # Matches patterns like: ABC-1234, ABC-1234-ABC-3829, ABC-123-DEF-456-GHI-789
+    local ticket_prefix=$(echo "$branch_name" | grep -oE "^(($prefixes)-[0-9]+)(-(($prefixes)-[0-9]+))*" | head -1)
 
     # Exit if no ticket prefix found
     if [ -z "$ticket_prefix" ]; then

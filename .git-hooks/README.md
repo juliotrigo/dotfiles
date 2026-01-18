@@ -32,6 +32,26 @@ A single `hook-wrapper` script handles all hooks. Individual hook names are syml
 
 This allows global hooks to coexist with project-specific local hooks.
 
+## Current Hook Behavior
+
+### prepare-commit-msg: Ticket ID Prepending
+
+Automatically prepends ticket IDs to commit messages based on branch name. This feature is opt-in.
+
+**Enable:**
+
+```bash
+git config --global hooks.ticketPrefixes "ABC|DEF|GHI"
+```
+
+**Disable:**
+
+```bash
+git config --global hooks.ticketPrefixes ""
+```
+
+See `hook-wrapper` comments for examples and details.
+
 ## Permissions
 
 - `hook-wrapper` must be executable: `chmod +x hook-wrapper`

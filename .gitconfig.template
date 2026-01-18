@@ -7,6 +7,12 @@
 	attributesfile = ~/.gitattributes
 	hooksPath = ~/.git-hooks
 
+[hooks]
+	# Ticket prefixes for prepare-commit-msg hook (pipe-separated regex pattern)
+	# Branches like ABC-1234-fix-bug will have "ABC-1234" prepended to commit messages
+	# Example: ticketPrefixes = ABC|DEF|GHI
+	ticketPrefixes =
+
 # macOS-only: Sourcetree diff/merge tools (uses opendiff and Sourcetree.app)
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"

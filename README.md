@@ -70,15 +70,17 @@ Use `--dry-run` to preview changes without making them.
 ```shell
 bash $DOTFILES_DIR/scripts/setup-git-symlinks.sh
 
+# Replace Your Name and your.email@example.com with your actual git user name and email
 GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" \
     bash $DOTFILES_DIR/scripts/setup-gitconfig.sh
+
+# Enable automatic ticket ID prepending for commits (optional)
+git config --global hooks.ticketPrefixes "FR|CVP|CVF|CVR"
 ```
 
 The symlink script is idempotent and skips existing files/symlinks with warnings.
 The gitconfig script creates a backup before overwriting an existing config.
 Both scripts support `--dry-run` to preview changes without making them.
-
-Replace `Your Name` and `your.email@example.com` with your actual git user name and email.
 
 For more information about git hooks configuration, see [.git-hooks/README.md](.git-hooks/README.md).
 
