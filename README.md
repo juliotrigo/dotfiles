@@ -66,7 +66,28 @@ bash $DOTFILES_DIR/scripts/setup-claude.sh
 The script is idempotent and skips existing files/symlinks with warnings.
 Use `--dry-run` to preview changes without making them.
 
+### Homebrew
+
+Install dependencies from the Brewfile:
+
+```shell
+brew bundle install
+```
+
+Other useful commands:
+
+```shell
+# List all formulae and casks in the Brewfile
+brew bundle list
+brew bundle list --cask
+
+# Check whether dependencies are satisfied
+brew bundle check --verbose
+```
+
 ### Git Config
+
+**Prerequisite:** Run `brew bundle install` first. The gitconfig script requires `envsubst` from the `gettext` package.
 
 ```shell
 bash $DOTFILES_DIR/scripts/setup-git-symlinks.sh
@@ -84,27 +105,6 @@ The gitconfig script creates a backup before overwriting an existing config.
 Both scripts support `--dry-run` to preview changes without making them.
 
 For more information about git hooks configuration, see [.git-hooks/README.md](.git-hooks/README.md).
-
-### Homebrew
-
-Get a list of all the formulae and casks in the Brewfile:
-
-```shell
-brew bundle list
-brew bundle list --cask
-```
-
-Check whether the Brewfile's dependencies are satisfied:
-
-```shell
-brew bundle check --verbose
-```
-
-Satisfy missing dependencies:
-
-```shell
-brew bundle install
-```
 
 ## Resources
 
