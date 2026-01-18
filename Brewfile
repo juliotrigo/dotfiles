@@ -1,6 +1,9 @@
 # AWS
 brew "aws-vault"
 
+# JSON processing
+brew "jq"
+
 # Git
 brew "git-lfs"
 brew "gh"
@@ -38,8 +41,7 @@ brew "pinentry-mac"
 brew "bmon"
 
 # PostgreSQL
-# To install PostgreSQL, we need to install the libpq library first
-# brew "libpq"
+brew "libpq"
 
 # Install if `canvas` is not compatible with Node.js
 # brew "cairo"
