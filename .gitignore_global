@@ -1,0 +1,22 @@
+# Global gitignore - patterns to ignore across all git repositories
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# Editors and IDEs
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Claude Code - local/machine-specific files (settings, session state, personal instructions)
+**/.claude/settings.local.json
+**/.claude/*.local.md
+**/CLAUDE.local.md

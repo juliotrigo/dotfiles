@@ -1,0 +1,48 @@
+[user]
+	name = ${GIT_USER_NAME}
+	email = ${GIT_USER_EMAIL}
+
+[core]
+	excludesfile = ~/.gitignore_global
+	attributesfile = ~/.gitattributes
+	hooksPath = ~/.git-hooks
+
+[hooks]
+	# Ticket prefixes for prepare-commit-msg hook (pipe-separated regex pattern)
+	# Branches like ABC-1234-fix-bug will have "ABC-1234" prepended to commit messages
+	# Example: ticketPrefixes = ABC|DEF|GHI
+	ticketPrefixes =
+
+# macOS-only: Sourcetree diff/merge tools (uses opendiff and Sourcetree.app)
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[commit]
+	template = ~/.gitmessage
+
+[push]
+	default = upstream
+
+[merge]
+	conflictstyle = diff3
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[init]
+	defaultBranch = master
+
+# Rewrite GitHub HTTPS URLs to SSH (uses SSH keys, no credential prompts)
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[github]
+	protocol = ssh

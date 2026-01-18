@@ -1,0 +1,84 @@
+#!/bin/bash
+# Generic git hook wrapper that handles all hooks via symlinks.
+# Runs custom logic per hook type, then calls local hooks if they exist.
+
+HOOK_NAME=$(basename "$0")
+
+# --- Custom logic per hook type ---
+
+# Prepends ticket IDs to commit messages based on branch name.
+#
+# Configure prefixes via: git config --global hooks.ticketPrefixes "ABC|DEF|GHI"
+# If not configured, this hook does nothing (opt-in behavior).
+#
+# Examples:
+#   Branch: ABC-1234-fix-bug         Message: "Fix login"   -> "ABC-1234 Fix login"
+#   Branch: ABC-1234-DEF-5678-feat   Message: "Add button"  -> "ABC-1234-DEF-5678 Add button"
+#   Branch: main                     Message: "Fix login"   -> "Fix login" (unchanged)
+#   Branch: feature/something        Message: "Add feature" -> "Add feature" (unchanged)
+#
+# Skips prepending if:
+#   - Message already starts with the ticket ID
+#   - It's a merge commit
+#   - Branch doesn't match the ticket pattern
+#
+prepend_ticket_id() {
+    local commit_msg_file="$1"
+    local commit_source="$2"
+
+    # Skip merge commits
+    if [ "$commit_source" = "merge" ]; then
+        return
+    fi
+
+    # Get current branch name
+    local branch_name=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+    # Exit if not on a branch (detached HEAD)
+    if [ -z "$branch_name" ]; then
+        return
+    fi
+
+    # Get ticket prefixes from git config (opt-in, does nothing if not configured)
+    local prefixes=$(git config --get hooks.ticketPrefixes)
+
+    # Exit if no prefixes configured
+    if [ -z "$prefixes" ]; then
+        return
+    fi
+
+    # Extract consecutive ticket IDs from the start of the branch name
+    # Matches patterns like: ABC-1234, ABC-1234-ABC-3829, ABC-123-DEF-456-GHI-789
+    local ticket_prefix=$(echo "$branch_name" | grep -oE "^(($prefixes)-[0-9]+)(-(($prefixes)-[0-9]+))*" | head -1)
+
+    # Exit if no ticket prefix found
+    if [ -z "$ticket_prefix" ]; then
+        return
+    fi
+
+    # Read current commit message
+    local commit_msg=$(cat "$commit_msg_file")
+
+    # Skip if message already starts with the ticket prefix
+    if echo "$commit_msg" | grep -qE "^$ticket_prefix"; then
+        return
+    fi
+
+    # Prepend ticket prefix to commit message
+    echo "$ticket_prefix $commit_msg" > "$commit_msg_file"
+}
+
+case "$HOOK_NAME" in
+    prepare-commit-msg)
+        prepend_ticket_id "$1" "$2"
+        ;;
+esac
+
+# --- Call local hook if it exists ---
+
+GIT_DIR=$(git rev-parse --git-dir 2>/dev/null)
+LOCAL_HOOK="$GIT_DIR/hooks/$HOOK_NAME"
+
+if [ -x "$LOCAL_HOOK" ]; then
+    exec "$LOCAL_HOOK" "$@"
+fi
