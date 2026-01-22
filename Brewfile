@@ -1,5 +1,6 @@
 # AWS
 brew "aws-vault"
+brew "awscli"
 
 # JSON processing
 brew "jq"
