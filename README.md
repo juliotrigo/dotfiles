@@ -9,9 +9,11 @@ My dotfiles.
 dotfiles/
 ├── .claude/
 │   ├── CLAUDE.md
+│   ├── README.md
 │   ├── commands/
 │   │   └── release.md
-│   └── docs/
+│   └── includes/
+│       └── python.md
 ├── .git-hooks/
 │   ├── README.md
 │   ├── hook-wrapper
@@ -35,7 +37,7 @@ dotfiles/
 ├── .claude/
 │   ├── CLAUDE.md            -> dotfiles/.claude/CLAUDE.md
 │   ├── commands/            -> dotfiles/.claude/commands/
-│   └── docs/                -> dotfiles/.claude/docs/
+│   └── includes/            -> dotfiles/.claude/includes/
 ├── .git-hooks/              -> dotfiles/.git-hooks/
 ├── .gitattributes           -> dotfiles/.gitattributes
 ├── .gitconfig               # Generated from template

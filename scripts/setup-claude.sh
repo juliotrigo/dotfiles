@@ -22,7 +22,7 @@ echo ""
 
 create_symlink "$DOTFILES_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 create_symlink "$DOTFILES_DIR/.claude/commands" "$HOME/.claude/commands"
-create_symlink "$DOTFILES_DIR/.claude/docs" "$HOME/.claude/docs"
+create_symlink "$DOTFILES_DIR/.claude/includes" "$HOME/.claude/includes"
 
 echo ""
 echo "Done."
