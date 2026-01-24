@@ -8,15 +8,22 @@
 #   bash verify-dotfiles.sh git gnupg    # Check multiple categories
 #
 # Status types (color-coded):
-#   SYMLINK -> <path>                - Green - Points to repo file, already configured
-#   SYMLINK -> <path> (wrong target) - Red   - Points elsewhere, will be skipped
-#   EXISTS (file)      - Red - File (not symlink), will be skipped
-#   EXISTS (directory) - Red - Directory (not symlink), will be skipped (lists contents)
-#   EXISTS (template)         - Green  - Generated from template, matches expected
-#   EXISTS (template differs) - Red    - Generated from template, differs from expected
-#   EXISTS (template)         - Yellow - Cannot compare (envsubst missing)
-#   EXISTS (template)         - Yellow - Comparison may be inaccurate (env vars not set)
-#   MISSING           - Yellow - Target doesn't exist, will be created by setup
+#   SYMLINK -> <path>                - Green  - Points to repo file, already configured
+#   SYMLINK -> <path> (wrong target) - Red    - Points elsewhere, will be skipped
+#   EXISTS (file)                    - Red    - File (not symlink), will be skipped
+#   EXISTS (directory)               - Red    - Directory (not symlink), will be skipped
+#   EXISTS (template)                - Green  - Generated from template, matches expected
+#   EXISTS (template differs)        - Red    - Generated from template, differs from expected
+#   EXISTS (template)                - Yellow - Cannot compare (envsubst missing)
+#   EXISTS (template)                - Yellow - Comparison may be inaccurate (env vars not set)
+#   MISSING                          - Yellow - Target doesn't exist, will be created by setup
+#   CONFIGURED                       - Green  - Already configured correctly
+#   PARTIAL                          - Yellow - Partially configured
+#   NOT CONFIGURED                   - Yellow - Not yet configured
+#
+# Informational checks (not counted in summary):
+#   EXISTS                           - Green  - Optional file exists
+#   NOT FOUND                        - Yellow - Optional file not present
 #
 # Special handling:
 #   - .gitconfig: Compared against template with env var substitution.
@@ -61,7 +68,7 @@ MAX_DIFF_LINES=30
 MAX_FILES_SHOWN=5
 
 # Available categories
-ALL_CATEGORIES="claude git gnupg"
+ALL_CATEGORIES="claude git gnupg zsh"
 
 # Print colored status
 print_status() {
@@ -284,6 +291,9 @@ get_category_files() {
             echo ".gnupg/gpg-agent.conf:$HOME/.gnupg/gpg-agent.conf"
             echo ".gnupg/dirmngr.conf:$HOME/.gnupg/dirmngr.conf"
             ;;
+        zsh)
+            echo ".zshrc.d:$HOME/.zshrc.d"
+            ;;
         *)
             return 1
             ;;
@@ -310,6 +320,75 @@ check_category() {
         IFS=':' read -r source target special <<< "$mapping"
         check_file "$DOTFILES_DIR/$source" "$target" "$special"
     done < <(get_category_files "$category")
+
+    # Category-specific informational checks
+    case "$category" in
+        zsh)
+            check_zshrc_sources
+            check_optional_file "$HOME/.zshrc.local" "For machine-specific settings"
+            ;;
+    esac
+}
+
+# Check an optional file (informational only, not counted in summary)
+check_optional_file() {
+    local target="$1"
+    local description="$2"
+
+    echo ""
+    echo -e "${BOLD}$target${NC} (optional)"
+
+    if [ -f "$target" ]; then
+        print_status "$GREEN" "EXISTS"
+        print_note "$description"
+    else
+        print_status "$YELLOW" "NOT FOUND"
+        print_note "$description"
+    fi
+}
+
+# Check if ~/.zshrc sources the zshrc.d files
+check_zshrc_sources() {
+    local zshrc="$HOME/.zshrc"
+
+    echo ""
+    echo -e "${BOLD}$zshrc${NC} (configuration check)"
+
+    if [ ! -f "$zshrc" ]; then
+        print_status "$YELLOW" "NOT FOUND"
+        print_note "Cannot check source lines"
+        return
+    fi
+
+    # Check for source lines (excluding comments)
+    local omz_sourced=false
+    local custom_sourced=false
+
+    if grep -v '^\s*#' "$zshrc" | grep -qE '(source|\.) .*\.zshrc\.d/omz\.zsh'; then
+        omz_sourced=true
+    fi
+
+    if grep -v '^\s*#' "$zshrc" | grep -qE '(source|\.) .*\.zshrc\.d/custom\.zsh'; then
+        custom_sourced=true
+    fi
+
+    if $omz_sourced && $custom_sourced; then
+        print_status "$GREEN" "CONFIGURED"
+        print_note "Both omz.zsh and custom.zsh are sourced"
+        OK_COUNT=$((OK_COUNT + 1))
+    elif $omz_sourced; then
+        print_status "$YELLOW" "PARTIAL"
+        print_note "omz.zsh sourced, custom.zsh missing"
+        ATTENTION_COUNT=$((ATTENTION_COUNT + 1))
+    elif $custom_sourced; then
+        print_status "$YELLOW" "PARTIAL"
+        print_note "custom.zsh sourced, omz.zsh missing"
+        ATTENTION_COUNT=$((ATTENTION_COUNT + 1))
+    else
+        print_status "$YELLOW" "NOT CONFIGURED"
+        print_note "Add source lines for omz.zsh and custom.zsh"
+        ATTENTION_COUNT=$((ATTENTION_COUNT + 1))
+    fi
 }
 
 # Print summary
