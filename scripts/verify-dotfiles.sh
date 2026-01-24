@@ -17,13 +17,13 @@
 #   EXISTS (template)                - Yellow - Cannot compare (envsubst missing)
 #   EXISTS (template)                - Yellow - Comparison may be inaccurate (env vars not set)
 #   MISSING                          - Yellow - Target doesn't exist, will be created by setup
+#   CONFIGURED                       - Green  - Already configured correctly
+#   PARTIAL                          - Yellow - Partially configured
+#   NOT CONFIGURED                   - Yellow - Not yet configured
 #
 # Informational checks (not counted in summary):
 #   EXISTS                           - Green  - Optional file exists
 #   NOT FOUND                        - Yellow - Optional file not present
-#   CONFIGURED                       - Green  - Source lines found in ~/.zshrc
-#   PARTIAL                          - Yellow - Some source lines missing
-#   NOT CONFIGURED                   - Yellow - Source lines not found in ~/.zshrc
 #
 # Special handling:
 #   - .gitconfig: Compared against template with env var substitution.
@@ -347,7 +347,7 @@ check_optional_file() {
     fi
 }
 
-# Check if ~/.zshrc sources the zshrc.d files (informational only)
+# Check if ~/.zshrc sources the zshrc.d files
 check_zshrc_sources() {
     local zshrc="$HOME/.zshrc"
 
@@ -375,15 +375,19 @@ check_zshrc_sources() {
     if $omz_sourced && $custom_sourced; then
         print_status "$GREEN" "CONFIGURED"
         print_note "Both omz.zsh and custom.zsh are sourced"
+        OK_COUNT=$((OK_COUNT + 1))
     elif $omz_sourced; then
         print_status "$YELLOW" "PARTIAL"
         print_note "omz.zsh sourced, custom.zsh missing"
+        ATTENTION_COUNT=$((ATTENTION_COUNT + 1))
     elif $custom_sourced; then
         print_status "$YELLOW" "PARTIAL"
         print_note "custom.zsh sourced, omz.zsh missing"
+        ATTENTION_COUNT=$((ATTENTION_COUNT + 1))
     else
         print_status "$YELLOW" "NOT CONFIGURED"
         print_note "Add source lines for omz.zsh and custom.zsh"
+        ATTENTION_COUNT=$((ATTENTION_COUNT + 1))
     fi
 }
 

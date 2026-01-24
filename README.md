@@ -94,6 +94,7 @@ The script shows the status of each file:
 - **EXISTS (template)**: Green if matches, yellow if cannot compare (install gettext) or comparison may be inaccurate (set env vars)
 - **EXISTS (template differs)**: Red - Generated from template but differs from expected
 - **MISSING**: Yellow - Will be created by setup
+- **CONFIGURED** (Green) / **PARTIAL** | **NOT CONFIGURED** (Yellow): Configuration check status
 - **EXISTS/NOT FOUND** (optional): Green/Yellow - Informational only, not counted in summary
 
 ### Claude Code
