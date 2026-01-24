@@ -26,6 +26,9 @@ dotfiles/
 │   ├── dirmngr.conf
 │   ├── gpg-agent.conf
 │   └── gpg.conf
+├── .zshrc.d/
+│   ├── custom.zsh
+│   └── omz.zsh
 └── scripts/
     ├── lib/
     │   ├── common.sh          # Shared: bash checks, dry-run parsing
@@ -34,6 +37,7 @@ dotfiles/
     ├── setup-git-symlinks.sh
     ├── setup-gitconfig.sh
     ├── setup-gnupg-symlinks.sh
+    ├── setup-zsh-symlinks.sh
     └── verify-dotfiles.sh     # Check status before setup
 ```
 
@@ -49,10 +53,11 @@ dotfiles/
 ├── .gitconfig               # Generated from template
 ├── .gitignore_global        -> dotfiles/.gitignore_global
 ├── .gitmessage              -> dotfiles/.gitmessage
-└── .gnupg/
-    ├── dirmngr.conf         -> dotfiles/.gnupg/dirmngr.conf
-    ├── gpg-agent.conf       -> dotfiles/.gnupg/gpg-agent.conf
-    └── gpg.conf             -> dotfiles/.gnupg/gpg.conf
+├── .gnupg/
+│   ├── dirmngr.conf         -> dotfiles/.gnupg/dirmngr.conf
+│   ├── gpg-agent.conf       -> dotfiles/.gnupg/gpg-agent.conf
+│   └── gpg.conf             -> dotfiles/.gnupg/gpg.conf
+└── .zshrc.d/                -> dotfiles/.zshrc.d/
 ```
 
 ## Installation
@@ -89,6 +94,7 @@ The script shows the status of each file:
 - **EXISTS (template)**: Green if matches, yellow if cannot compare (install gettext) or comparison may be inaccurate (set env vars)
 - **EXISTS (template differs)**: Red - Generated from template but differs from expected
 - **MISSING**: Yellow - Will be created by setup
+- **EXISTS/NOT FOUND** (optional): Green/Yellow - Informational only, not counted in summary
 
 ### Claude Code
 
@@ -155,6 +161,33 @@ gpgconf --kill dirmngr
 gpgconf --launch gpg-agent
 gpgconf --launch dirmngr
 ```
+
+The script is idempotent and skips existing files/symlinks with warnings.
+Use `--dry-run` to preview changes without making them.
+
+### Zsh
+
+**Prerequisite:** [Oh My Zsh](https://ohmyz.sh/) must be installed first.
+
+```shell
+bash $DOTFILES_DIR/scripts/setup-zsh-symlinks.sh
+```
+
+Then add these lines to your `~/.zshrc`:
+
+```shell
+# Add BEFORE "source $ZSH/oh-my-zsh.sh":
+[[ -f ~/.zshrc.d/omz.zsh ]] && source ~/.zshrc.d/omz.zsh
+
+# Add at the END of the file:
+[[ -f ~/.zshrc.d/custom.zsh ]] && source ~/.zshrc.d/custom.zsh
+```
+
+Finally, remove the duplicated settings from `~/.zshrc`:
+- `ZSH_THEME` and `plugins` (now in `omz.zsh`)
+- Any custom configuration that's now in `custom.zsh`
+
+**Local configuration:** For machine-specific or work-specific settings (API keys, internal tools, etc.), create `~/.zshrc.local`. This file is sourced at the end of `custom.zsh` if it exists, and is not tracked in git.
 
 The script is idempotent and skips existing files/symlinks with warnings.
 Use `--dry-run` to preview changes without making them.
