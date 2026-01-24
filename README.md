@@ -33,7 +33,8 @@ dotfiles/
     ├── setup-claude.sh
     ├── setup-git-symlinks.sh
     ├── setup-gitconfig.sh
-    └── setup-gnupg-symlinks.sh
+    ├── setup-gnupg-symlinks.sh
+    └── verify-dotfiles.sh     # Check status before setup
 ```
 
 **Home directory:**
@@ -67,6 +68,27 @@ export DOTFILES_DIR=$WORKSPACE_DIR/juliotrigo/dotfiles
 mkdir -p "$(dirname $DOTFILES_DIR)"
 git clone https://github.com/juliotrigo/dotfiles.git $DOTFILES_DIR
 ```
+
+### Verify Before Setup
+
+Before running any setup scripts, verify what already exists in your home directory:
+
+```shell
+# Check all categories
+bash $DOTFILES_DIR/scripts/verify-dotfiles.sh
+
+# Check specific categories
+bash $DOTFILES_DIR/scripts/verify-dotfiles.sh git
+bash $DOTFILES_DIR/scripts/verify-dotfiles.sh git gnupg
+```
+
+The script shows the status of each file:
+- **SYMLINK -> \<path\>**: Green - Already configured correctly
+- **SYMLINK -> \<path\> (wrong target)**: Red - Will be skipped, check if intentional
+- **EXISTS (file/directory)**: Red - Will be skipped, backup and remove if you want setup to manage it
+- **EXISTS (template)**: Green if matches, yellow if cannot compare (install gettext) or comparison may be inaccurate (set env vars)
+- **EXISTS (template differs)**: Red - Generated from template but differs from expected
+- **MISSING**: Yellow - Will be created by setup
 
 ### Claude Code
 
