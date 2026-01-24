@@ -22,13 +22,18 @@ dotfiles/
 ├── .gitconfig.template
 ├── .gitignore_global
 ├── .gitmessage
+├── .gnupg/
+│   ├── dirmngr.conf
+│   ├── gpg-agent.conf
+│   └── gpg.conf
 └── scripts/
     ├── lib/
     │   ├── common.sh          # Shared: bash checks, dry-run parsing
     │   └── symlinks.sh        # Shared: symlink creation function
     ├── setup-claude.sh
     ├── setup-git-symlinks.sh
-    └── setup-gitconfig.sh
+    ├── setup-gitconfig.sh
+    └── setup-gnupg-symlinks.sh
 ```
 
 **Home directory:**
@@ -42,7 +47,11 @@ dotfiles/
 ├── .gitattributes           -> dotfiles/.gitattributes
 ├── .gitconfig               # Generated from template
 ├── .gitignore_global        -> dotfiles/.gitignore_global
-└── .gitmessage              -> dotfiles/.gitmessage
+├── .gitmessage              -> dotfiles/.gitmessage
+└── .gnupg/
+    ├── dirmngr.conf         -> dotfiles/.gnupg/dirmngr.conf
+    ├── gpg-agent.conf       -> dotfiles/.gnupg/gpg-agent.conf
+    └── gpg.conf             -> dotfiles/.gnupg/gpg.conf
 ```
 
 ## Installation
@@ -107,6 +116,26 @@ The gitconfig script creates a backup before overwriting an existing config.
 Both scripts support `--dry-run` to preview changes without making them.
 
 For more information about git hooks configuration, see [.git-hooks/README.md](.git-hooks/README.md).
+
+### GnuPG
+
+**Prerequisite:** Run `brew bundle install` first. The gpg-agent config requires `pinentry-mac`.
+
+```shell
+# Remove existing config files (they will be replaced with symlinks)
+rm ~/.gnupg/gpg.conf ~/.gnupg/gpg-agent.conf ~/.gnupg/dirmngr.conf
+
+bash $DOTFILES_DIR/scripts/setup-gnupg-symlinks.sh
+
+# Reload GPG components to pick up new config
+gpgconf --kill gpg-agent
+gpgconf --kill dirmngr
+gpgconf --launch gpg-agent
+gpgconf --launch dirmngr
+```
+
+The script is idempotent and skips existing files/symlinks with warnings.
+Use `--dry-run` to preview changes without making them.
 
 ## Resources
 
