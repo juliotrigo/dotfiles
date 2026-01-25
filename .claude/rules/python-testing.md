@@ -9,7 +9,7 @@ paths:
 
 ## Mock Patterns
 
-- Prefer pytest fixtures over in-line patching or decorator-based patching
+- Prefer pytest fixtures over inline patching or decorator-based patching
 - Use pytest fixtures with patch() context managers instead of inline Mock() creation
 - Create descriptive fixture names with clear documentation
 

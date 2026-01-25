@@ -16,7 +16,7 @@
 - Never use `git commit -a` (bypasses explicit staging).
 - Before amending a commit, you MUST ask for permission and explain why amending is appropriate. You should not assume amending is acceptable or offer it as a default option.
 - Never run destructive git commands (force push, rebase, reset --hard, clean -f) without explicit permission.
-- Before committing, check you're not on master or staging. If so, ask Julio to create a branch.
+- Before committing, check you're not on master or staging. If so, propose a branch name and ask Julio for confirmation before creating it.
 - Before creating a new branch, ensure the base branch (usually master) is up to date with the remote.
 - When creating a PR:
   - Ask Julio for the base branch.
