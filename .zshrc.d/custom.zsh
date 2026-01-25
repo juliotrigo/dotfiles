@@ -36,13 +36,6 @@ source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.4.7
 
-# Claude Code
-# Run Claude Code with the Node version it was installed on, regardless of the currently active one.
-# This allows using Claude Code while working in projects that require other Node versions.
-claude() {
-  nvm exec 22.20.0 -- claude "$@"
-}
-
 # PostgreSQL
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 

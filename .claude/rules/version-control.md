@@ -1,0 +1,24 @@
+# Version Control
+
+- Commit messages:
+  - Subject line: max 50 characters, imperative mood
+  - Body: wrap at 72 characters
+  - NEVER add Co-Authored-By lines.
+- Always show the draft commit message for Julio's approval before running git commit.
+- Always show the draft PR title/description for Julio's approval before running gh pr edit.
+- After merging a PR, switch to the base branch and pull the merged changes.
+- After every commit, push it.
+- After creating a branch, push it.
+- When pushing a branch for the first time, always use -u flag: `git push -u origin <branch>`.
+- Always use explicit push: `git push origin <branch>` instead of `git push`.
+- Always run `git add` and `git commit` as separate commands, not chained together. This allows reviewing what's staged before committing.
+- Never use `git add -A` or `git add .` without first running `git status` to review what will be staged.
+- Never use `git commit -a` (bypasses explicit staging).
+- Before amending a commit, you MUST ask for permission and explain why amending is appropriate. You should not assume amending is acceptable or offer it as a default option.
+- Never run destructive git commands (force push, rebase, reset --hard, clean -f) without explicit permission.
+- Before committing, check you're not on master or staging. If so, propose a branch name and ask Julio for confirmation before creating it.
+- Before creating a new branch, ensure the base branch (usually master) is up to date with the remote.
+- When creating a PR:
+  - Ask Julio for the base branch.
+  - Always use `--base` and `--head` explicitly: `gh pr create --base <base> --head <head>`.
+  - Provide the PR link after creating it.
