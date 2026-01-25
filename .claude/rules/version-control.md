@@ -20,4 +20,5 @@
 - Before creating a new branch, ensure the base branch (usually master) is up to date with the remote.
 - When creating a PR:
   - Ask Julio for the base branch.
+  - Always use `--base` and `--head` explicitly: `gh pr create --base <base> --head <head>`.
   - Provide the PR link after creating it.
