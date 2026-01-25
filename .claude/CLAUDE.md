@@ -30,6 +30,7 @@ Rule #2: NEVER mention Claude or Anthropic in any persistent records (git commit
 - Ask before: deleting files, destructive commands, or changes outside the project scope.
 - Before deleting a folder, always check its contents to ensure it doesn't contain files we want to keep.
 - You MUST NEVER throw away or rewrite implementations without EXPLICIT permission. If you're considering this, You MUST STOP and ask first.
+- Testing and investigation should not leave side effects (creating resources, modifying state, etc.). If side effects are necessary, ask first.
 
 ## Writing code
 
