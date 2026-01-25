@@ -8,44 +8,35 @@ This directory contains Claude Code configuration files that are symlinked to `~
 |------|-------------|
 | `CLAUDE.md` | Main instructions and rules |
 | `commands/` | Custom slash commands |
-| `includes/` | Additional configuration loaded per-project |
+| `rules/` | Path-filtered rules (auto-loaded) |
 
 ## Setup
 
 In [`CLAUDE.md`](CLAUDE.md), update the name references to your own.
 
-## Project Configuration
+## Plugins & Marketplaces
 
-Each project can have a `CLAUDE.local.md` file to specify project-specific settings:
+Add the superpowers marketplace:
 
-```markdown
-# Local Project Configuration
-
-State file: `.claude/current-state.local.md`
-
-Includes: python
+```shell
+claude plugins add-marketplace https://github.com/obra/superpowers-marketplace.git
 ```
 
-### State file
+Enable plugins:
 
-The state file is for tracking whatever context is useful between sessions (status, pending tasks, recent changes, notes, etc.). Claude reads it at session start and updates it after completing work.
+```shell
+claude plugins enable superpowers@superpowers-marketplace
+claude plugins enable sentry@claude-plugins-official
+claude plugins enable playwright@claude-plugins-official
+claude plugins enable code-simplifier@claude-plugins-official
+claude plugins enable atlassian@claude-plugins-official
+```
 
-### Includes
+Some plugins require OAuth authentication on first use (Sentry, Atlassian).
 
-Additional configuration files loaded per-project. These can contain patterns for languages, frameworks, libraries, or other project-specific rules.
+## State File
 
-**Available includes:**
-
-| File | Description |
-|------|-------------|
-| `python.md` | uv, ruff, pytest fixtures, mock patterns, assertion patterns |
-
-**Adding new includes:**
-
-1. Create a new file in `includes/` (e.g., `javascript.md`, `django.md`, `react.md`)
-2. Add rules and patterns
-3. Update this README
-4. Reference it in project `CLAUDE.local.md` files
+Each project uses a state file (`.claude/current-state.local.md`) for tracking context between sessions. See the Session state section in `CLAUDE.md` for details.
 
 ## Attribution
 
@@ -53,4 +44,5 @@ Inspiration has been taken from the following places:
 
 - https://github.com/obra/dotfiles
 - https://github.com/harperreed/dotfiles
+- https://github.com/affaan-m/everything-claude-code
 - People at https://github.com/sohonetlabs

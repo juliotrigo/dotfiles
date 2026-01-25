@@ -277,7 +277,7 @@ get_category_files() {
         claude)
             echo ".claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
             echo ".claude/commands:$HOME/.claude/commands"
-            echo ".claude/includes:$HOME/.claude/includes"
+            echo ".claude/rules:$HOME/.claude/rules"
             ;;
         git)
             echo ".git-hooks:$HOME/.git-hooks"

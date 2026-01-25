@@ -12,8 +12,11 @@ dotfiles/
 │   ├── README.md
 │   ├── commands/
 │   │   └── release.md
-│   └── includes/
-│       └── python.md
+│   └── rules/
+│       ├── python-testing.md
+│       ├── security.md
+│       ├── testing-patterns.md
+│       └── version-control.md
 ├── .git-hooks/
 │   ├── README.md
 │   ├── hook-wrapper
@@ -47,7 +50,7 @@ dotfiles/
 ├── .claude/
 │   ├── CLAUDE.md            -> dotfiles/.claude/CLAUDE.md
 │   ├── commands/            -> dotfiles/.claude/commands/
-│   └── includes/            -> dotfiles/.claude/includes/
+│   └── rules/               -> dotfiles/.claude/rules/
 ├── .git-hooks/              -> dotfiles/.git-hooks/
 ├── .gitattributes           -> dotfiles/.gitattributes
 ├── .gitconfig               # Generated from template
@@ -105,6 +108,8 @@ bash $DOTFILES_DIR/scripts/setup-claude.sh
 
 The script is idempotent and skips existing files/symlinks with warnings.
 Use `--dry-run` to preview changes without making them.
+
+For more details, see [.claude/README.md](.claude/README.md).
 
 ### Homebrew
 
