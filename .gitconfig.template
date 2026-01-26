@@ -13,16 +13,13 @@
 	ticketPrefixes = ${GIT_TICKET_PREFIXES}
 
 [alias]
+	co = checkout
 	fa = fetch --all -p --tags
+	st = status
 
-# macOS-only: Sourcetree diff/merge tools (uses opendiff and Sourcetree.app)
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[diff]
+	algorithm = histogram
+	colorMoved = plain
 
 [commit]
 	template = ~/.gitmessage
@@ -30,8 +27,11 @@
 [push]
 	default = upstream
 
+[fetch]
+	prune = true
+
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 
 [filter "lfs"]
 	required = true
@@ -48,3 +48,13 @@
 
 [github]
 	protocol = ssh
+
+# Sourcetree diff tool (uses opendiff)
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+# Sourcetree merge tool (uses Sourcetree.app)
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
