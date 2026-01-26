@@ -10,8 +10,10 @@
 [hooks]
 	# Ticket prefixes for prepare-commit-msg hook (pipe-separated regex pattern)
 	# Branches like ABC-1234-fix-bug will have "ABC-1234" prepended to commit messages
-	# Example: ticketPrefixes = ABC|DEF|GHI
-	ticketPrefixes =
+	ticketPrefixes = ${GIT_TICKET_PREFIXES}
+
+[alias]
+	fa = fetch --all -p --tags
 
 # macOS-only: Sourcetree diff/merge tools (uses opendiff and Sourcetree.app)
 [difftool "sourcetree"]

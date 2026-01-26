@@ -8,7 +8,8 @@ HOOK_NAME=$(basename "$0")
 
 # Prepends ticket IDs to commit messages based on branch name.
 #
-# Configure prefixes via: git config --global hooks.ticketPrefixes "ABC|DEF|GHI"
+# Reads prefixes from: git config hooks.ticketPrefixes
+# See README.md for configuration details.
 # If not configured, this hook does nothing (opt-in behavior).
 #
 # Examples:

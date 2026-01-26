@@ -27,7 +27,7 @@
 #
 # Special handling:
 #   - .gitconfig: Compared against template with env var substitution.
-#     Set GIT_USER_NAME/GIT_USER_EMAIL for accurate diff (see README.md).
+#     Set GIT_USER_NAME/GIT_USER_EMAIL (optionally GIT_TICKET_PREFIXES) for accurate diff (see README.md).
 #   - Directories: When a regular dir exists, lists its contents to help
 #     decide whether to back up and remove
 
@@ -166,7 +166,7 @@ check_file() {
             elif [ "$mode" = "raw" ]; then
                 # Without env vars, we can't do an accurate comparison
                 print_status "$YELLOW" "EXISTS (template)"
-                print_action "Set GIT_USER_NAME/GIT_USER_EMAIL to compare accurately, then re-run"
+                print_action "Set GIT_USER_NAME/GIT_USER_EMAIL (optionally GIT_TICKET_PREFIXES) to compare accurately, then re-run"
                 local raw_identical=false
                 if echo "$expected" | diff -q - "$target" >/dev/null 2>&1; then
                     raw_identical=true
@@ -230,7 +230,7 @@ get_expected_gitconfig() {
         if ! command -v envsubst >/dev/null 2>&1; then
             return 1
         fi
-        envsubst '${GIT_USER_NAME} ${GIT_USER_EMAIL}' < "$template"
+        envsubst '${GIT_USER_NAME} ${GIT_USER_EMAIL} ${GIT_TICKET_PREFIXES}' < "$template"
     else
         cat "$template"
     fi
@@ -248,6 +248,9 @@ show_gitconfig_diff() {
     # Print note about comparison mode
     if [ "$mode" = "substituted" ]; then
         print_note "Comparing with substituted template (using current env vars)"
+        if [ -z "${GIT_TICKET_PREFIXES+x}" ]; then
+            print_note "GIT_TICKET_PREFIXES not set, ticketPrefixes comparison may be inaccurate"
+        fi
     else
         print_note "Comparing with raw template (GIT_USER_NAME/GIT_USER_EMAIL not set)"
     fi

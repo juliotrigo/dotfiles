@@ -51,12 +51,18 @@ if [ -z "$GIT_USER_EMAIL" ]; then
     fi
 fi
 
+# Get ticket prefixes from environment or prompt (optional, empty disables ticket prepending)
+if [ -z "${GIT_TICKET_PREFIXES+x}" ]; then
+    read -p "Enter ticket prefixes (optional, e.g. ABC|DEF|GHI): " GIT_TICKET_PREFIXES
+fi
+
 # Export for envsubst
 export GIT_USER_NAME
 export GIT_USER_EMAIL
+export GIT_TICKET_PREFIXES
 
 # Generate new config
-NEW_CONFIG=$(envsubst '${GIT_USER_NAME} ${GIT_USER_EMAIL}' < "$TEMPLATE_FILE")
+NEW_CONFIG=$(envsubst '${GIT_USER_NAME} ${GIT_USER_EMAIL} ${GIT_TICKET_PREFIXES}' < "$TEMPLATE_FILE")
 
 # Check if target file exists
 if [ -f "$TARGET_FILE" ]; then

@@ -38,17 +38,7 @@ This allows global hooks to coexist with project-specific local hooks.
 
 Automatically prepends ticket IDs to commit messages based on branch name. This feature is opt-in.
 
-**Enable:**
-
-```bash
-git config --global hooks.ticketPrefixes "ABC|DEF|GHI"
-```
-
-**Disable:**
-
-```bash
-git config --global hooks.ticketPrefixes ""
-```
+The hook reads prefixes from `git config hooks.ticketPrefixes`. See [Git Config](../README.md#git-config) for configuration details.
 
 See `hook-wrapper` comments for examples and details.
 

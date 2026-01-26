@@ -65,7 +65,7 @@ dotfiles/
 
 ## Installation
 
-### Setup
+### Initial Setup
 
 ```shell
 # Environment variables
@@ -77,7 +77,7 @@ mkdir -p "$(dirname $DOTFILES_DIR)"
 git clone https://github.com/juliotrigo/dotfiles.git $DOTFILES_DIR
 ```
 
-### Verify Before Setup
+### Verify Configuration
 
 Before running any setup scripts, verify what already exists in your home directory:
 
@@ -89,6 +89,8 @@ bash $DOTFILES_DIR/scripts/verify-dotfiles.sh
 bash $DOTFILES_DIR/scripts/verify-dotfiles.sh git
 bash $DOTFILES_DIR/scripts/verify-dotfiles.sh git gnupg
 ```
+
+For accurate gitconfig comparison, set the environment variables documented in the [Git Config](#git-config) section.
 
 The script shows the status of each file:
 - **SYMLINK -> \<path\>**: Green - Already configured correctly
@@ -137,12 +139,13 @@ brew bundle check --verbose
 ```shell
 bash $DOTFILES_DIR/scripts/setup-git-symlinks.sh
 
-# Replace Your Name and your.email@example.com with your actual git user name and email
-GIT_USER_NAME="Your Name" GIT_USER_EMAIL="your.email@example.com" \
+# Replace values with your actual git user name, email, and ticket prefixes
+# If env vars are not set, the script will prompt for them
+# GIT_TICKET_PREFIXES can be left empty to disable ticket prepending
+GIT_USER_NAME="Your Name" \
+    GIT_USER_EMAIL="your.email@example.com" \
+    GIT_TICKET_PREFIXES="ABC|DEF|GHI" \
     bash $DOTFILES_DIR/scripts/setup-gitconfig.sh
-
-# Enable automatic ticket ID prepending for commits (optional)
-git config --global hooks.ticketPrefixes "FR|CVP|CVF|CVR"
 ```
 
 The symlink script is idempotent and skips existing files/symlinks with warnings.
