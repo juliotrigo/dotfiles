@@ -18,8 +18,8 @@ To run these tests, create a test script that:
 
 ### TC-CAT-01: No categories specified
 **Setup:** Run without arguments
-**Expected:** All categories (claude, git, gnupg) are checked
-**Verify:** Output contains "=== Category: claude ===", "=== Category: git ===", "=== Category: gnupg ==="
+**Expected:** All categories (claude, git, gnupg, zsh) are checked
+**Verify:** Output contains "=== Category: claude ===", "=== Category: git ===", "=== Category: gnupg ===", "=== Category: zsh ==="
 
 ### TC-CAT-02: Single category
 **Setup:** Run with `git` argument
@@ -34,7 +34,7 @@ To run these tests, create a test script that:
 ### TC-CAT-04: Invalid category
 **Setup:** Run with `invalid` argument
 **Expected:** Error message and exit
-**Verify:** Output contains "Unknown category: invalid" and "Available categories: claude git gnupg"
+**Verify:** Output contains "Unknown category: invalid" and "Available categories: claude git gnupg zsh"
 
 ### TC-CAT-05: Mix of valid and invalid categories
 **Setup:** Run with `git invalid` arguments
@@ -137,7 +137,7 @@ To run these tests, create a test script that:
 
 ### TC-GIT-01: Gitconfig matches (with env vars)
 **Setup:**
-- Set GIT_USER_NAME and GIT_USER_EMAIL environment variables
+- Set GIT_USER_NAME, GIT_USER_EMAIL, and GIT_TICKET_PREFIXES environment variables
 - Create ~/.gitconfig with content matching substituted template
 **Expected:** Green status, counted as OK
 **Verify:**
@@ -149,7 +149,7 @@ To run these tests, create a test script that:
 
 ### TC-GIT-02: Gitconfig differs (with env vars)
 **Setup:**
-- Set GIT_USER_NAME and GIT_USER_EMAIL environment variables
+- Set GIT_USER_NAME, GIT_USER_EMAIL, and GIT_TICKET_PREFIXES environment variables
 - Create ~/.gitconfig with content that differs from substituted template
 **Expected:** Red status, counted as Attention
 **Verify:**
@@ -162,18 +162,18 @@ To run these tests, create a test script that:
 
 ### TC-GIT-03: Gitconfig without env vars
 **Setup:**
-- Unset GIT_USER_NAME and GIT_USER_EMAIL environment variables
+- Unset GIT_USER_NAME, GIT_USER_EMAIL, and GIT_TICKET_PREFIXES environment variables
 - Create ~/.gitconfig (any content - the test verifies yellow status appears when env vars are missing)
 **Expected:** Yellow status (inaccurate comparison), counted as Attention
 **Verify:**
 - Status line: "EXISTS (template)"
-- Action line: "Set GIT_USER_NAME/GIT_USER_EMAIL to compare accurately, then re-run"
+- Action line: "Set GIT_USER_NAME/GIT_USER_EMAIL (optionally GIT_TICKET_PREFIXES) to compare accurately, then re-run"
 - Note line: "Comparing with raw template (GIT_USER_NAME/GIT_USER_EMAIL not set)"
 - Summary: Attention count incremented
 
 ### TC-GIT-04: Gitconfig without envsubst (but env vars set)
 **Setup:**
-- Set GIT_USER_NAME and GIT_USER_EMAIL environment variables
+- Set GIT_USER_NAME, GIT_USER_EMAIL, and GIT_TICKET_PREFIXES environment variables
 - Ensure envsubst command is not available (e.g., temporarily rename it or modify PATH)
 - Create ~/.gitconfig
 **Expected:** Yellow status, counted as Attention
@@ -183,7 +183,22 @@ To run these tests, create a test script that:
 - Summary: Attention count incremented
 **Note:** This path only triggers when env vars are set (substituted mode) but envsubst is missing. Without env vars, raw mode is used which doesn't require envsubst.
 
-### TC-GIT-05: Gitconfig missing
+### TC-GIT-05: Gitconfig in substituted mode without GIT_TICKET_PREFIXES
+**Setup:**
+- Set GIT_USER_NAME and GIT_USER_EMAIL environment variables
+- Do NOT set GIT_TICKET_PREFIXES (unset, not empty)
+- Create ~/.gitconfig with content that has a non-empty ticketPrefixes value
+**Expected:** Red status, counted as Attention (ticketPrefixes differs due to missing env var)
+**Verify:**
+- Status line: "EXISTS (template differs)"
+- Action line: "Run setup-gitconfig.sh to update"
+- Note line: "Comparing with substituted template (using current env vars)"
+- Note line: "GIT_TICKET_PREFIXES not set, ticketPrefixes comparison may be inaccurate"
+- Diff shows ticketPrefixes line as differing (template has empty, actual has value)
+- Summary: Attention count incremented
+**Note:** This tests the partial accuracy warning. The comparison is still useful for name/email but inaccurate for ticketPrefixes.
+
+### TC-GIT-06: Gitconfig missing
 **Setup:** Ensure ~/.gitconfig doesn't exist
 **Expected:** Yellow status (MISSING), counted as Attention
 **Verify:**
