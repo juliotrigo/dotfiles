@@ -6,6 +6,7 @@ brew "awscli"
 brew "jq"
 
 # Git
+brew "git"
 brew "git-lfs"
 brew "gh"
 brew "pre-commit"
