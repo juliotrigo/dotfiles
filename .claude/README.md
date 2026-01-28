@@ -26,10 +26,11 @@ Enable plugins:
 
 ```shell
 claude plugins enable superpowers@superpowers-marketplace
-claude plugins enable sentry@claude-plugins-official
-claude plugins enable playwright@claude-plugins-official
-claude plugins enable code-simplifier@claude-plugins-official
 claude plugins enable atlassian@claude-plugins-official
+claude plugins enable claude-md-management@claude-plugins-official
+claude plugins enable code-simplifier@claude-plugins-official
+claude plugins enable playwright@claude-plugins-official
+claude plugins enable sentry@claude-plugins-official
 ```
 
 Some plugins require OAuth authentication on first use (Sentry, Atlassian).
