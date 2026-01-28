@@ -16,7 +16,7 @@ dotfiles/
 │       ├── python-testing.md
 │       ├── security.md
 │       ├── testing-patterns.md
-│       └── version-control.md
+│       └── GIT.md
 ├── .git-hooks/
 │   ├── README.md
 │   ├── hook-wrapper
@@ -32,6 +32,8 @@ dotfiles/
 ├── .zshrc.d/
 │   ├── custom.zsh
 │   └── omz.zsh
+├── AGENTS.md
+├── CLAUDE.md                -> AGENTS.md
 └── scripts/
     ├── lib/
     │   ├── common.sh          # Shared: bash checks, dry-run parsing

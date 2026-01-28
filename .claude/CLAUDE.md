@@ -29,7 +29,7 @@ Rule #2: NEVER mention Claude or Anthropic in any persistent records (git commit
 
 - Ask before deleting files, running destructive commands, or making changes outside the project scope.
 - Before deleting a folder, always check its contents to ensure it doesn't contain files we want to keep.
-- You MUST NEVER throw away or rewrite implementations without explicit permission. If you're considering this, You MUST STOP and ask first.
+- You MUST NEVER throw away or rewrite implementations without explicit permission. If you're considering this, you MUST STOP and ask first.
 - Testing and investigation should not leave side effects (creating resources, modifying state, etc.). If side effects are necessary, ask first.
 
 ## Writing code
@@ -68,6 +68,6 @@ When Julio says "state" or when continuing previous work, refer to the state fil
 - Read the state file to understand current status, pending issues, and recent changes.
 - Update the state file after completing a task, a step, fixing an issue, or merging a PR.
 
-# Summary instructions
+## Context compaction
 
 When you are using /compact, please focus on our conversation, your most recent (and most significant) learnings, and what you need to do next. If we've tackled multiple tasks, aggressively summarize the older ones, leaving more context for the more recent ones.
