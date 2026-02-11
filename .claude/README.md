@@ -9,6 +9,7 @@ This directory contains Claude Code configuration files that are symlinked to `~
 | `CLAUDE.md` | Main instructions and rules |
 | `commands/` | Custom slash commands |
 | `rules/` | Path-filtered rules (auto-loaded) |
+| `settings.json` | Plugin configuration (enabled/disabled plugins) |
 
 ## Setup
 
@@ -22,18 +23,7 @@ Add the superpowers marketplace:
 claude plugins add-marketplace https://github.com/obra/superpowers-marketplace.git
 ```
 
-Enable plugins:
-
-```shell
-claude plugins enable superpowers@superpowers-marketplace
-claude plugins enable atlassian@claude-plugins-official
-claude plugins enable claude-md-management@claude-plugins-official
-claude plugins enable code-simplifier@claude-plugins-official
-claude plugins enable playwright@claude-plugins-official
-claude plugins enable sentry@claude-plugins-official
-```
-
-Some plugins require OAuth authentication on first use (Sentry, Atlassian).
+Enabled plugins are configured in [`settings.json`](settings.json). Some plugins require OAuth authentication on first use (Sentry, Atlassian).
 
 ## State File
 
