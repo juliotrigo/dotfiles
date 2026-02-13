@@ -12,11 +12,12 @@ dotfiles/
 │   ├── README.md
 │   ├── commands/
 │   │   └── release.md
-│   └── rules/
-│       ├── python-testing.md
-│       ├── security.md
-│       ├── testing-patterns.md
-│       └── GIT.md
+│   ├── rules/
+│   │   ├── python-testing.md
+│   │   ├── security.md
+│   │   ├── testing-patterns.md
+│   │   └── GIT.md
+│   └── settings.json
 ├── .git-hooks/
 │   ├── README.md
 │   ├── hook-wrapper
@@ -52,7 +53,8 @@ dotfiles/
 ├── .claude/
 │   ├── CLAUDE.md            -> dotfiles/.claude/CLAUDE.md
 │   ├── commands/            -> dotfiles/.claude/commands/
-│   └── rules/               -> dotfiles/.claude/rules/
+│   ├── rules/               -> dotfiles/.claude/rules/
+│   └── settings.json        -> dotfiles/.claude/settings.json
 ├── .git-hooks/              -> dotfiles/.git-hooks/
 ├── .gitattributes           -> dotfiles/.gitattributes
 ├── .gitconfig               # Generated from template
