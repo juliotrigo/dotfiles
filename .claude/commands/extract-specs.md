@@ -10,6 +10,9 @@ You are extracting Figma specifications for a feature. Follow this process:
    - Parse out node IDs from URLs (format: `node-id=1234:5678`)
 
 2. **Extract specifications for each component**
+
+   **IMPORTANT:** You MUST call ALL FOUR tools (a-d) for EACH Figma URL. Do not skip any tool or only extract "representative samples" - extract specs for every component/variant listed.
+
    For each Figma URL found:
 
    a. **Run get_metadata:** (structure & dimensions)
@@ -48,13 +51,24 @@ You are extracting Figma specifications for a feature. Follow this process:
    This returns: `{"Blues/Soho Blue -3": "#b6d7ed", "Padding/base": "16", "iOS/Header 3": "Font(family: \"Roboto\", size: 16, weight: 400, lineHeight: 100)"}`
    Use for: Actual color hex values, typography specs, spacing/padding values, design token names
 
-   d. **Extract values:**
+   d. **Run get_screenshot:** (visual verification)
+   ```
+   mcp__figma__get_screenshot(
+     fileKey="[extract from URL]",
+     nodeId="[extract from URL]"
+   )
+   ```
+   This returns: Visual screenshot of the component
+   Use for: Verifying extracted values match visual appearance, catching discrepancies
+
+   e. **Extract values:**
    - Height/Width/Position from get_metadata
    - Layout composition and padding from get_design_context
    - Colors (hex), typography, spacing VALUES from get_variable_defs
+   - Visual confirmation from get_screenshot
 
 3. **Populate specification tables**
-   Update or create the "Component Specifications" section in context.md:
+   Update or create the "components_specifications.md" document in the same path:
    - Fill in "Figma" rows with extracted values
    - Mark verification status as "✅ MCP `get_metadata` verified"
    - Document any values that couldn't be extracted (mark as "⚠️ Needs verification")
@@ -77,5 +91,6 @@ You are extracting Figma specifications for a feature. Follow this process:
 - **get_metadata**: Most reliable for dimensions and positions (x, y, width, height)
 - **get_design_context**: Best for understanding layout composition; may show `size-full` instead of explicit heights (that's expected)
 - **get_variable_defs**: Essential for actual color hex values and typography specs; gives clean token→value mapping
+- **get_screenshot**: Essential for visual verification; catches discrepancies between extracted values and actual appearance
 - Border-box model: height includes padding
-- All three tools can be called in parallel for efficiency
+- All four tools can be called in parallel for efficiency
