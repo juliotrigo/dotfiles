@@ -137,6 +137,12 @@ brew bundle list --cask
 brew bundle check --verbose
 ```
 
+#### Peon Ping
+
+AI coding agent sound notifications. Follow the
+[setup instructions](https://github.com/PeonPing/peon-ping?tab=readme-ov-file#option-1-homebrew-recommended)
+to register hooks and download sound packs.
+
 ### Git Config
 
 **Prerequisite:** Run `brew bundle install` first. The gitconfig script requires `envsubst` from the `gettext` package.
