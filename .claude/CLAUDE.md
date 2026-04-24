@@ -47,8 +47,19 @@ Rule #2: NEVER mention Claude or Anthropic in any persistent records (git commit
 
 ## Documentation
 
-- Code files should have a brief explanation of what they do, using the appropriate convention for the language (docstrings, JSDoc, file-level comments, etc.).
+- Code files should have a brief explanation of what they do when their purpose isn't obvious from the filename and location. Use the appropriate convention for the language (docstrings, JSDoc, file-level comments, etc.).
 - Update relevant documentation (README.md, inline docs, etc.) when you make changes.
+
+## Figma specifications
+
+- When extracting or verifying Figma specifications, always use the `/extract-specs` command rather than calling Figma MCP tools directly.
+- This ensures consistent extraction, proper documentation, and verification against existing specs.
+- When working with design specs, check for structural changes (new elements, hierarchy) not just styling (colors, spacing).
+- Compare Figma screenshots to browser rendering before declaring styling work complete.
+
+## Frontend development
+
+- Verify styling changes visually in browser - don't rely solely on snapshot tests passing.
 
 ## Troubleshooting
 
