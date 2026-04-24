@@ -11,6 +11,7 @@ dotfiles/
 │   ├── CLAUDE.md
 │   ├── README.md
 │   ├── commands/
+│   │   ├── extract-specs.md
 │   │   └── release.md
 │   ├── rules/
 │   │   ├── python-testing.md
@@ -135,6 +136,12 @@ brew bundle list --cask
 # Check whether dependencies are satisfied
 brew bundle check --verbose
 ```
+
+#### Peon Ping
+
+AI coding agent sound notifications. Follow the
+[setup instructions](https://github.com/PeonPing/peon-ping?tab=readme-ov-file#option-1-homebrew-recommended)
+to register hooks and download sound packs.
 
 ### Git Config
 

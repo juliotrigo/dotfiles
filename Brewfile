@@ -45,6 +45,10 @@ brew "bmon"
 # PostgreSQL
 brew "libpq"
 
+# AI
+tap "PeonPing/tap"
+brew "peon-ping"
+
 # Install if `canvas` is not compatible with Node.js
 # brew "cairo"
 # brew "pango"
