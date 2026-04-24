@@ -11,6 +11,7 @@ dotfiles/
 │   ├── CLAUDE.md
 │   ├── README.md
 │   ├── commands/
+│   │   ├── extract-specs.md
 │   │   └── release.md
 │   ├── rules/
 │   │   ├── python-testing.md
