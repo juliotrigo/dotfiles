@@ -2,11 +2,13 @@
 
 ## Writing story descriptions
 
-Structure stories with three sections in this order:
+Structure stories with these sections in this order:
 
 1. **Summary** — Short paragraph explaining what the story is and why it matters. No implementation details.
 2. **Acceptance criteria** — High-level, outcome-oriented bullets describing what "done" looks like to a reader who isn't going to implement it. Avoid technical specifics (package names, config keys, file paths) — those belong in tech notes.
-3. **Tech notes** — Implementation details: package lists, config snippets, tables, file paths, verification steps. Anything a reviewer or implementer would need to do the work.
+3. **Tech notes** (optional) — Implementation details: package lists, config snippets, tables, file paths, verification steps. Anything a reviewer or implementer would need to do the work.
+
+Tech notes are optional. Include them only when they carry information that is not easily discoverable from the codebase or the story itself — e.g. a non-obvious constraint, a specific config snippet, a known root cause, a reference to an existing implementation that's not the obvious one, or verification steps that aren't routine. Do not include reproduction steps already implied by the AC, generic file paths an implementer would find on their own, or "compare X with Y" hints — that's noise. If you don't have something concretely useful to add, omit the section.
 
 ## Markdown formatting via the Atlassian MCP plugin
 
