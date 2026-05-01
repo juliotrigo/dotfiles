@@ -1,5 +1,22 @@
 # Jira
 
+## Writing epic descriptions — keep them evergreen
+
+An epic description should rarely need updates as work progresses. If it requires regular updates, the wrong content is in it. Specifically:
+
+- **Don't include "Already shipped" / "In progress" / "Done" sections** that list individual items by status. They rot the moment something changes.
+- **Don't reference current Jira ticket statuses** (e.g., "CVF-XXXX, Selected for Development", "in review", "blocked"). Statuses belong on tickets, not in narrative.
+- **Don't use temporal framing** like "today the saga deadlocks" or "after Story X ships" — these become stale.
+
+Instead:
+
+- Capture the **structural scope**: the weaknesses, categories, repo split, dependencies between items. These don't change as items ship.
+- Phrase **acceptance criteria as outcomes**, not status references ("X is no longer a class of failure" / "Y is observable in Sentry" — not "ticket Z is shipped").
+- **Defer status to a source-of-truth doc** — but only if that doc lives somewhere all readers can access (Confluence, public wiki, committed repo file). **Don't reference local-only working files** (per the existing rule under "Markdown formatting" below — paths like `docs/agents/plans/...` that only exist in your working directory are invisible to anyone reading the Jira ticket). If no shared doc exists, defer status to the child tickets instead — they're always reachable from the epic.
+- **Cross-cutting concerns** describe relationships between items, not the current state of any one of them.
+
+The same principle applies to story descriptions to a lesser degree — but stories are short-lived enough that some status references are acceptable. Epics live longer and need to stay evergreen.
+
 ## Writing story descriptions
 
 Structure stories with these sections in this order:
