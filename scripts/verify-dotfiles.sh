@@ -282,6 +282,7 @@ get_category_files() {
             echo ".claude/commands:$HOME/.claude/commands"
             echo ".claude/rules:$HOME/.claude/rules"
             echo ".claude/settings.json:$HOME/.claude/settings.json"
+            echo ".claude/templates:$HOME/.claude/templates"
             ;;
         git)
             echo ".git-hooks:$HOME/.git-hooks"

@@ -5,6 +5,9 @@ brew "awscli"
 # JSON processing
 brew "jq"
 
+# Document conversion
+brew "pandoc"
+
 # Git
 brew "git"
 brew "git-lfs"
