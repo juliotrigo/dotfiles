@@ -10,6 +10,7 @@ This directory contains Claude Code configuration files that are symlinked to `~
 | `commands/` | Custom slash commands |
 | `rules/` | Path-filtered rules (auto-loaded) |
 | `settings.json` | Plugin configuration (enabled/disabled plugins) |
+| `templates/` | Reference templates (e.g. pandoc reference doc for Markdown→Google Docs conversions, used by the rule in `rules/markdown-to-google-docs.md`) |
 
 ## Setup
 

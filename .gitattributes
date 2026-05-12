@@ -1,0 +1,7 @@
+# Office binary formats — prevents line-ending conversion (e.g. on Windows
+# checkouts with core.autocrlf=true) which would corrupt the underlying zip
+# archive, and keeps `git diff` from rendering binary noise.
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.pdf binary

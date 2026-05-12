@@ -18,7 +18,9 @@ dotfiles/
 │   │   ├── security.md
 │   │   ├── testing-patterns.md
 │   │   └── GIT.md
-│   └── settings.json
+│   ├── settings.json
+│   └── templates/
+│       └── google-docs-reference.docx
 ├── .git-hooks/
 │   ├── README.md
 │   ├── hook-wrapper
@@ -55,7 +57,8 @@ dotfiles/
 │   ├── CLAUDE.md            -> dotfiles/.claude/CLAUDE.md
 │   ├── commands/            -> dotfiles/.claude/commands/
 │   ├── rules/               -> dotfiles/.claude/rules/
-│   └── settings.json        -> dotfiles/.claude/settings.json
+│   ├── settings.json        -> dotfiles/.claude/settings.json
+│   └── templates/           -> dotfiles/.claude/templates/
 ├── .git-hooks/              -> dotfiles/.git-hooks/
 ├── .gitattributes           -> dotfiles/.gitattributes
 ├── .gitconfig               # Generated from template
