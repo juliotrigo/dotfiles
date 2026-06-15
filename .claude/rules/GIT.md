@@ -22,3 +22,14 @@
   - Ask Julio for the base branch.
   - Always use `--base` and `--head` explicitly: `gh pr create --base <base> --head <head>`.
   - Provide the PR link after creating it.
+- When commenting on a PR, prefer inline review comments pinned to the relevant file/line over general PR conversation comments whenever the comment applies to specific code. Use `gh pr comment` only for comments that are genuinely PR-wide (e.g., overall summary, scope questions). For line-anchored comments, use the GitHub API:
+  - `POST repos/<owner>/<repo>/pulls/<number>/comments` with `commit_id`, `path`, `line`, `side` (usually `RIGHT`), and `body`.
+  - Get the PR head SHA via `gh pr view <number> --json headRefOid --jq .headRefOid`.
+  - Verify exact line numbers from the file content at that SHA, not from local checkout state.
+- When replying to an existing inline review comment, reply in the comment thread, not as a top-level PR comment or a new inline comment on the same line. Use `POST repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies` with just `body`. This keeps the reviewer's notification threaded and preserves the conversation context.
+- Keep PR descriptions brief and high-level. List what changed and why at the level a reviewer needs for orientation — avoid implementation detail (function names, internal flags, code paths). The diff is the source of truth.
+- Don't include test/suite/snapshot counts in PR descriptions; they go stale. Say "clean".
+- PR test plan items must be verifiable before merging (CI, local checks, branch smoke tests). Post-deploy monitoring and "watch for a week" tasks belong in the Jira ticket, not the PR.
+- Don't use planning-doc shorthand (case A, option 1, item X1) in PR descriptions. Reviewers come in cold; describe behaviours directly.
+- Don't restate Jira-visible relationships ("closes part of epic X") or out-of-scope notes ("follow-up tracked in ticket W"). Include cross-references only when they change what the reviewer can act on (e.g. "depends on PR Y being merged first").
+- Don't hard-wrap paragraphs in PR descriptions or comments. GitHub soft-wraps Markdown; hard-wraps reflow badly. One long line per paragraph (including text inside list items); newlines still go between paragraphs, items, code blocks, and headings. (Commit messages still wrap at 72 — different rendering context.)
