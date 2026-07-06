@@ -1,0 +1,21 @@
+README.md
+  s_ac14f93491f9af::t_0e81d3087477ff 14-15
+.claude/agents/simplicity-guard.md
+  s_ac14f93491f9af::t_b8c6e0cc3ea68d 1-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0fc5c9baf37a6350eb019754bf88a95c4f8a886b",
+  "prompts": {},
+  "sessions": {
+    "s_ac14f93491f9af": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1ba8079a-efa9-4192-af60-3bc57e13c016",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
