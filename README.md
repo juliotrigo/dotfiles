@@ -11,7 +11,8 @@ dotfiles/
 │   ├── CLAUDE.md
 │   ├── README.md
 │   ├── agents/
-│   │   └── regression-guard.md
+│   │   ├── regression-guard.md
+│   │   └── simplicity-guard.md
 │   ├── commands/
 │   │   ├── extract-specs.md
 │   │   └── release.md
