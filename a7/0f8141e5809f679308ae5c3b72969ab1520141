@@ -1,0 +1,20 @@
+README.md
+  s_ac14f93491f9af::t_20e541ebdcb01e 13-14
+  s_ac14f93491f9af::t_37fa20e5c716ab 62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "a70f8141e5809f679308ae5c3b72969ab1520141",
+  "prompts": {},
+  "sessions": {
+    "s_ac14f93491f9af": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1ba8079a-efa9-4192-af60-3bc57e13c016",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
