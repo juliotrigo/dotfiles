@@ -10,14 +10,18 @@ dotfiles/
 ├── .claude/
 │   ├── CLAUDE.md
 │   ├── README.md
+│   ├── agents/
+│   │   └── regression-guard.md
 │   ├── commands/
 │   │   ├── extract-specs.md
 │   │   └── release.md
 │   ├── rules/
+│   │   ├── markdown-to-google-docs.md
 │   │   ├── python-testing.md
 │   │   ├── security.md
 │   │   ├── testing-patterns.md
-│   │   └── GIT.md
+│   │   ├── GIT.md
+│   │   └── JIRA.md
 │   ├── settings.json
 │   └── templates/
 │       └── google-docs-reference.docx
@@ -55,6 +59,7 @@ dotfiles/
 ~/
 ├── .claude/
 │   ├── CLAUDE.md            -> dotfiles/.claude/CLAUDE.md
+│   ├── agents/              -> dotfiles/.claude/agents/
 │   ├── commands/            -> dotfiles/.claude/commands/
 │   ├── rules/               -> dotfiles/.claude/rules/
 │   ├── settings.json        -> dotfiles/.claude/settings.json

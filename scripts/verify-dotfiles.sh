@@ -279,6 +279,7 @@ get_category_files() {
     case "$category" in
         claude)
             echo ".claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
+            echo ".claude/agents:$HOME/.claude/agents"
             echo ".claude/commands:$HOME/.claude/commands"
             echo ".claude/rules:$HOME/.claude/rules"
             echo ".claude/settings.json:$HOME/.claude/settings.json"
