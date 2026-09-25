@@ -1,0 +1,23 @@
+.claude/rules/GIT.md
+  s_fdbd0bb9a9ff54::t_16f7fa6edcc3d3 36
+  s_fdbd0bb9a9ff54::t_b8fa13287fe7af 27
+  s_fdbd0bb9a9ff54::t_70fb3fc46ec1ca 22
+  s_fdbd0bb9a9ff54::t_6edcfaa1503a37 33
+  s_fdbd0bb9a9ff54::t_5d260e6ebb8817 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "774c5f23aee843a2adadb593a05ca843a8bd54df",
+  "prompts": {},
+  "sessions": {
+    "s_fdbd0bb9a9ff54": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b6e6d607-d5eb-44e6-8b8d-6b2541f4880b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
