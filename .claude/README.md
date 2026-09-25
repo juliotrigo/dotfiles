@@ -7,6 +7,7 @@ This directory contains Claude Code configuration files that are symlinked to `~
 | Path | Description |
 |------|-------------|
 | `CLAUDE.md` | Main instructions and rules |
+| `agents/` | Custom subagents (dispatched by name via the Agent tool) |
 | `commands/` | Custom slash commands |
 | `rules/` | Path-filtered rules (auto-loaded) |
 | `settings.json` | Plugin configuration (enabled/disabled plugins) |

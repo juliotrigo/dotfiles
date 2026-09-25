@@ -21,6 +21,7 @@ echo "Setting up Claude Code symlinks..."
 echo ""
 
 create_symlink "$DOTFILES_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+create_symlink "$DOTFILES_DIR/.claude/agents" "$HOME/.claude/agents"
 create_symlink "$DOTFILES_DIR/.claude/commands" "$HOME/.claude/commands"
 create_symlink "$DOTFILES_DIR/.claude/rules" "$HOME/.claude/rules"
 create_symlink "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
