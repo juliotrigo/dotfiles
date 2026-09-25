@@ -41,6 +41,21 @@ To run these tests, create a test script that:
 **Expected:** Processes git, then errors on invalid
 **Verify:** Output contains "=== Category: git ===" followed by error for invalid
 
+### TC-CAT-06: Claude skills are checked per skill
+**Setup:** Create two skill directories in the repo (`$REPO/.claude/skills/alpha/SKILL.md` and `$REPO/.claude/skills/beta/SKILL.md`), plus an unrelated directory in the home skills dir (`~/.claude/skills/other/`)
+**Expected:** One entry per repo skill, and `~/.claude/skills` itself is never checked
+**Verify:**
+- Output contains a `~/.claude/skills/alpha` block and a `~/.claude/skills/beta` block
+- Output contains no block for `~/.claude/skills` on its own
+- `~/.claude/skills/other` is not reported
+
+### TC-CAT-07: Claude skill directories without SKILL.md are ignored
+**Setup:** Create a skill directory in the repo (`$REPO/.claude/skills/alpha/SKILL.md`), plus a directory holding only a `.DS_Store` (`$REPO/.claude/skills/leftover/.DS_Store`), as left behind when a skill is removed after Finder has written to its directory
+**Expected:** Only directories containing `SKILL.md` are checked
+**Verify:**
+- Output contains a `~/.claude/skills/alpha` block
+- `~/.claude/skills/leftover` is not reported
+
 ## Symlink States
 
 ### TC-SYM-01: Correct symlink

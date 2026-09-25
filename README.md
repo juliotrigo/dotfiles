@@ -24,6 +24,11 @@ dotfiles/
 │   │   ├── GIT.md
 │   │   └── JIRA.md
 │   ├── settings.json
+│   ├── skills/
+│   │   ├── qa-notes/
+│   │   │   └── SKILL.md
+│   │   └── story-pointing/
+│   │       └── SKILL.md
 │   └── templates/
 │       └── google-docs-reference.docx
 ├── .git-hooks/
@@ -64,6 +69,8 @@ dotfiles/
 │   ├── commands/            -> dotfiles/.claude/commands/
 │   ├── rules/               -> dotfiles/.claude/rules/
 │   ├── settings.json        -> dotfiles/.claude/settings.json
+│   ├── skills/              # Real directory (shared with other tools)
+│   │   └── <skill-name>/    -> dotfiles/.claude/skills/<skill-name>/
 │   └── templates/           -> dotfiles/.claude/templates/
 ├── .git-hooks/              -> dotfiles/.git-hooks/
 ├── .gitattributes           -> dotfiles/.gitattributes
@@ -124,6 +131,9 @@ bash $DOTFILES_DIR/scripts/setup-claude.sh
 
 The script is idempotent and skips existing files/symlinks with warnings.
 Use `--dry-run` to preview changes without making them.
+
+Skills are linked one directory at a time rather than linking `~/.claude/skills/` as a whole, because that directory also holds skills installed by other tools.
+Re-run the script after adding a skill to the repo.
 
 For more details, see [.claude/README.md](.claude/README.md).
 

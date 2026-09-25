@@ -30,6 +30,8 @@
 #     Set GIT_USER_NAME/GIT_USER_EMAIL (optionally GIT_TICKET_PREFIXES) for accurate diff (see README.md).
 #   - Directories: When a regular dir exists, lists its contents to help
 #     decide whether to back up and remove
+#   - Claude skills: Checked per skill directory, not as ~/.claude/skills as a
+#     whole, since that directory also holds skills installed by other tools
 
 set -e
 
@@ -284,6 +286,10 @@ get_category_files() {
             echo ".claude/rules:$HOME/.claude/rules"
             echo ".claude/settings.json:$HOME/.claude/settings.json"
             echo ".claude/templates:$HOME/.claude/templates"
+            # Skills are linked one directory at a time (see setup-claude.sh)
+            while IFS= read -r skill; do
+                echo ".claude/skills/$skill:$HOME/.claude/skills/$skill"
+            done < <(claude_skill_names "$DOTFILES_DIR")
             ;;
         git)
             echo ".git-hooks:$HOME/.git-hooks"

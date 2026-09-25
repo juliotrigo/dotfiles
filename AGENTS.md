@@ -43,8 +43,9 @@ dotfiles/
 
 - **Symlink-based:** Config files are symlinked from `~` to this repo (not copied)
 - **Exception: gitconfig** is generated from `.gitconfig.template` via `envsubst`, not symlinked
+- **Exception: Claude skills** are linked one directory at a time (`~/.claude/skills/<name>`), not as a whole directory, because `~/.claude/skills/` also holds skills installed by other tools
 - **Idempotent scripts:** All setup scripts are safe to re-run; they skip existing files/symlinks
-- **Shared libraries:** `scripts/lib/common.sh` (bash checks, dry-run) and `scripts/lib/symlinks.sh` (symlink creation) are sourced by setup scripts
+- **Shared libraries:** `scripts/lib/common.sh` (bash checks, dry-run, Claude skill listing) and `scripts/lib/symlinks.sh` (symlink creation) are sourced by setup scripts
 - **Hook wrapper:** `.git-hooks/hook-wrapper` is the single entry point — it's symlinked from per-hook files (e.g., `~/.git-hooks/prepare-commit-msg`)
 - **Script conventions:** All scripts use `set -e` and source shared libs from `scripts/lib/`
 
@@ -58,6 +59,7 @@ dotfiles/
 - `setup-gitconfig.sh` needs `GIT_USER_NAME`, `GIT_USER_EMAIL`, and optionally `GIT_TICKET_PREFIXES` (as env vars or via interactive prompt)
 - GnuPG setup requires manually removing existing config files before symlinking (they're regular files by default)
 - Zsh setup requires manual edits to `~/.zshrc` to source the module files
+- Adding a skill to `.claude/skills/` requires re-running `setup-claude.sh` to link it; removing one leaves a stale symlink in `~/.claude/skills/` to delete by hand
 - The git hook `prepare-commit-msg` auto-prepends ticket IDs from branch names — controlled by `git config hooks.ticketPrefixes`
 
 ## Workflow

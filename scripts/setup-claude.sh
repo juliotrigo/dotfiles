@@ -27,5 +27,10 @@ create_symlink "$DOTFILES_DIR/.claude/rules" "$HOME/.claude/rules"
 create_symlink "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
 create_symlink "$DOTFILES_DIR/.claude/templates" "$HOME/.claude/templates"
 
+# Skills are linked one directory at a time (see claude_skill_names in lib/common.sh)
+while IFS= read -r skill; do
+    create_symlink "$DOTFILES_DIR/.claude/skills/$skill" "$HOME/.claude/skills/$skill"
+done < <(claude_skill_names "$DOTFILES_DIR")
+
 echo ""
 echo "Done."
