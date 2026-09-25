@@ -23,4 +23,4 @@
 
 # Work - project-specific Claude skills
 .claude/skills/webrtc
-.claude/skills/janus
+.claude/skills/janus-0_x
