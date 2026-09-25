@@ -1,0 +1,21 @@
+.claude/rules/markdown-to-google-docs.md
+  s_5b1e715a315959::t_0e3d44156f25c8 43
+.claude/rules/JIRA.md
+  s_5b1e715a315959::t_35be8bef712357 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f61b1a7506efa4a36a746354d18283080c2a4486",
+  "prompts": {},
+  "sessions": {
+    "s_5b1e715a315959": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "679fee14-e03c-4c77-a704-4ca99beaa1e7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
