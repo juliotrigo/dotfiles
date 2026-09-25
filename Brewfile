@@ -45,6 +45,9 @@ brew "pinentry-mac"
 # Monitoring
 brew "bmon"
 
+# Notifications
+brew "terminal-notifier"
+
 # PostgreSQL
 brew "libpq"
 
