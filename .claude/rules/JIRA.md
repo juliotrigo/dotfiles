@@ -5,7 +5,7 @@
 An epic description should rarely need updates as work progresses. If it requires regular updates, the wrong content is in it. Specifically:
 
 - **Don't include "Already shipped" / "In progress" / "Done" sections** that list individual items by status. They rot the moment something changes.
-- **Don't reference current Jira ticket statuses** (e.g., "CVF-XXXX, Selected for Development", "in review", "blocked"). Statuses belong on tickets, not in narrative.
+- **Don't reference current Jira ticket statuses** (e.g., "PROJ-1234, Selected for Development", "in review", "blocked"). Statuses belong on tickets, not in narrative.
 - **Don't use temporal framing** like "today the saga deadlocks" or "after Story X ships" — these become stale.
 
 Instead:

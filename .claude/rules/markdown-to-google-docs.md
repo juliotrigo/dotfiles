@@ -40,7 +40,7 @@ These have NOT come through correctly in past conversions with the default invoc
 
 No special handling needed for these:
 
-- **Internal links** (e.g. `[CVF-9842](https://...)`).
+- **Internal links** (e.g. `[PROJ-1234](https://...)`).
 - **Headings, bold, lists, paragraph text.**
 
 ## Heading bookmarks (default behaviour, kept on purpose)
