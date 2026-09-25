@@ -1,0 +1,20 @@
+Brewfile
+  s_5b1e715a315959::t_acc3bfb468175a 48
+  s_5b1e715a315959::t_23b5099edf353b 49-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8044c54f93ab25553bbb2322c6ec81eb75489628",
+  "prompts": {},
+  "sessions": {
+    "s_5b1e715a315959": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "679fee14-e03c-4c77-a704-4ca99beaa1e7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
