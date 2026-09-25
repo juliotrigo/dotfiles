@@ -1,0 +1,14 @@
+.gitignore_global
+  h_43afd51d529ed5 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "04d1539a405efae2084b160be2bd081a233e2c8c",
+  "prompts": {},
+  "humans": {
+    "h_43afd51d529ed5": {
+      "author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
