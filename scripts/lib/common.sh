@@ -24,3 +24,20 @@ parse_dry_run() {
         echo ""
     fi
 }
+
+# List the names of the Claude Code skills held in the repo.
+# Skills are linked into ~/.claude/skills one directory at a time rather than
+# linking ~/.claude/skills itself, because that directory also holds skills
+# installed by other tools (cubic, peon-ping).
+# A skill is a directory containing SKILL.md; any other directory (e.g. one
+# left behind holding only a .DS_Store after its skill was removed) is skipped.
+# Args: $1 = dotfiles directory
+# Output: one skill name per line
+claude_skill_names() {
+    local dotfiles_dir="$1"
+    local skill
+    for skill in "$dotfiles_dir"/.claude/skills/*/; do
+        [ -f "$skill/SKILL.md" ] || continue
+        basename "$skill"
+    done
+}
