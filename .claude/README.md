@@ -29,6 +29,33 @@ To add a skill:
 
 Removing a skill from this repo does not remove the symlink in `~/.claude/skills/`; delete the stale symlink by hand.
 
+### Third-party skills
+
+Some skills come from other sources. Install them straight into `~/.claude/skills/`. A skill changes how the agent behaves, so check what changed before you update one.
+
+- [asd-ste100](https://github.com/danyuchn/asd-ste100-skill): rewrites text in ASD-STE100 Simplified Technical English. [`rules/writing.md`](rules/writing.md) says when to use it. It is pinned to a reviewed commit. Read the diff before you move the pin, and never `git pull` blindly.
+
+  Install:
+
+  ```shell
+  git clone https://github.com/danyuchn/asd-ste100-skill.git ~/.claude/skills/asd-ste100
+  git -C ~/.claude/skills/asd-ste100 checkout --detach 3944283c183eea13fe5bd902b572da3b4de8bf44
+  ```
+
+  Update:
+
+  ```shell
+  git -C ~/.claude/skills/asd-ste100 fetch
+  git -C ~/.claude/skills/asd-ste100 diff HEAD origin/master
+  git -C ~/.claude/skills/asd-ste100 checkout --detach <new-sha>
+  ```
+
+  After an update, change the commit in the install command above.
+
+- [display.dev](https://display.dev): publishes HTML or Markdown as display.dev pages. Install it (the skill and the `display` MCP server) by following display.dev's setup steps for Claude, from the display.dev app. The "Publishing pages" rules in [`CLAUDE.md`](CLAUDE.md) limit when to use it.
+
+  The skill's description in `~/.claude/skills/display-dev/SKILL.md` has a local edit: it starts with the same HARD RULE text as `CLAUDE.md`. Installing or updating the skill replaces that file, so add the text back afterwards.
+
 ## Plugins & Marketplaces
 
 Add the superpowers marketplace:

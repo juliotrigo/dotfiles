@@ -61,6 +61,11 @@ Rule #2: NEVER mention Claude or Anthropic in any persistent records (git commit
 
 - Verify styling changes visually in browser - don't rely solely on snapshot tests passing.
 
+## Publishing pages
+
+- HARD RULE: only use display.dev (its skill, the `dsp` CLI or its MCP server) when Julio names display.dev explicitly in the request. For every other request to publish, share or create a page or link, keep using claude.ai artifacts (the Artifact tool), as before. Phrases such as "publish this", "share this" or "make a private link" do NOT mean display.dev on their own.
+- HARD RULE: never publish anonymously to display.dev (the skill's `scripts/publish.sh` unauthenticated path or its public `/v1/public/artifacts` endpoint), even when display.dev is named, unless Julio explicitly asks for an anonymous public link. Authenticated display.dev publishing goes through the display.dev MCP server.
+
 ## Troubleshooting
 
 - When something fails (command, test, build), investigate the error before retrying. Don't blindly retry or make random changes - understand what went wrong first.

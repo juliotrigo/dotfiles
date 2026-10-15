@@ -15,6 +15,9 @@ brew "gh"
 brew "pre-commit"
 brew "gettext"  # Provides envsubst, used by setup-gitconfig.sh
 
+# Multi-repo management
+brew "mani"
+
 # FZF
 brew "fzf"
 
