@@ -1,0 +1,23 @@
+.claude/README.md
+  s_36b44218a5e593::t_2f7e0987b4151e 34
+  s_36b44218a5e593::t_776a1dda863203 32-33,35,37-54
+  s_36b44218a5e593::t_2787887d987a27 36
+.claude/rules/writing.md
+  s_36b44218a5e593::t_ec651b02d343f3 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c63a6bb8cc6cbebc3eb18f418376ab073e3a0543",
+  "prompts": {},
+  "sessions": {
+    "s_36b44218a5e593": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3f5093de-ee78-4ff3-b4f9-859f6cf4534f",
+        "model": "unknown"
+      },
+      "human_author": "Julio Trigo <julio.trigo@gmail.com>"
+    }
+  }
+}
