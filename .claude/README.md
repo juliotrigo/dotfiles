@@ -29,6 +29,29 @@ To add a skill:
 
 Removing a skill from this repo does not remove the symlink in `~/.claude/skills/`; delete the stale symlink by hand.
 
+### Third-party skills
+
+Some skills come from other repos. Clone them straight into `~/.claude/skills/` and pin them to a reviewed commit. A skill changes how the agent behaves, so read the diff before you move the pin, and never `git pull` blindly.
+
+- [asd-ste100](https://github.com/danyuchn/asd-ste100-skill): rewrites text in ASD-STE100 Simplified Technical English. [`rules/writing.md`](rules/writing.md) says when to use it.
+
+  Install:
+
+  ```shell
+  git clone https://github.com/danyuchn/asd-ste100-skill.git ~/.claude/skills/asd-ste100
+  git -C ~/.claude/skills/asd-ste100 checkout --detach 3944283c183eea13fe5bd902b572da3b4de8bf44
+  ```
+
+  Update:
+
+  ```shell
+  git -C ~/.claude/skills/asd-ste100 fetch
+  git -C ~/.claude/skills/asd-ste100 diff HEAD origin/master
+  git -C ~/.claude/skills/asd-ste100 checkout --detach <new-sha>
+  ```
+
+  After an update, change the commit in the install command above.
+
 ## Plugins & Marketplaces
 
 Add the superpowers marketplace:
