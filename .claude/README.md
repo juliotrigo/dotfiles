@@ -31,9 +31,9 @@ Removing a skill from this repo does not remove the symlink in `~/.claude/skills
 
 ### Third-party skills
 
-Some skills come from other repos. Clone them straight into `~/.claude/skills/` and pin them to a reviewed commit. A skill changes how the agent behaves, so read the diff before you move the pin, and never `git pull` blindly.
+Some skills come from other sources. Install them straight into `~/.claude/skills/`. A skill changes how the agent behaves, so check what changed before you update one.
 
-- [asd-ste100](https://github.com/danyuchn/asd-ste100-skill): rewrites text in ASD-STE100 Simplified Technical English. [`rules/writing.md`](rules/writing.md) says when to use it.
+- [asd-ste100](https://github.com/danyuchn/asd-ste100-skill): rewrites text in ASD-STE100 Simplified Technical English. [`rules/writing.md`](rules/writing.md) says when to use it. It is pinned to a reviewed commit. Read the diff before you move the pin, and never `git pull` blindly.
 
   Install:
 
@@ -51,6 +51,10 @@ Some skills come from other repos. Clone them straight into `~/.claude/skills/` 
   ```
 
   After an update, change the commit in the install command above.
+
+- [display.dev](https://display.dev): publishes HTML or Markdown as display.dev pages. Install it (the skill and the `display` MCP server) by following display.dev's setup steps for Claude, from the display.dev app. The "Publishing pages" rules in [`CLAUDE.md`](CLAUDE.md) limit when to use it.
+
+  The skill's description in `~/.claude/skills/display-dev/SKILL.md` has a local edit: it starts with the same HARD RULE text as `CLAUDE.md`. Installing or updating the skill replaces that file, so add the text back afterwards.
 
 ## Plugins & Marketplaces
 
